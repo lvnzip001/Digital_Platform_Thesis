@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+
+<center><h2>Embed file</h2>
+<hr>
+
+<p> 
+
+    Two options, depending on whether it is for ownership or ownership enforcement 
+ 
+</p>
+<p>
+
+    <a href="{% url 'embed_ownership' %} " class = 'btn btn-outline-info  btn-sm btn-block' style="height:80px;width:500px;" text-align="center" >Ownership</a>
+
+</p>
+
+<p>
+
+    <a href= "{%url 'embed_enforcement'%}"class = 'btn btn-outline-danger  btn-sm btn-block' style="height:80px;width:500px" text-align="center">Ownership Enforcement</a>
+</center>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

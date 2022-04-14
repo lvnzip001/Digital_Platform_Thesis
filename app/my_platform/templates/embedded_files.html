@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+
+<style>
+    table {
+      border-spacing: 0px;
+      table-layout: auto;
+      margin-left: auto;
+      margin-right: auto;
+      width: 400px;
+    }
+    td {
+
+      word-break: break-all;
+    }
+  </style>
+
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+
+<h2>Embedded Image Files</h2>
+<hr>
+<p> 
+    <a href="{% url 'index' %}" class="btn btn-primary">Home</a>
+    <a href="{% url 'menu_embed' %}" class="btn btn-primary">Embed File</a>
+    
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Media Type</th>
+            <th>Watermark Information</th>
+            <th>Hash Information</th>
+            <th>Download File</th>
+            <th>Delete File</th>
+            
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for uploaded_file in uploaded_files %}
+        <tr>
+            <td>
+                {% if uploaded_file.file%}<!-- File in this case in the file route-->
+                <img src="{{uploaded_file.file.url}}" alt="Text File/Audio File" style="width: 60px;">
+                {%else%}
+                <span class="text-muted">No Cover</span>
+                {% endif %}
+            </td>
+            <td>{{ uploaded_file.info}}</td>
+            <td>{{ uploaded_file.hash}}</td>
+            <td>
+                <a href="{{uploaded_file.file.url}}" class = 'btn btn-sm btn-info' target="_blank"> <!-- targe is for opening a  new window-->
+                  Download 
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'delete_file' uploaded_file.hash_url %}" class = 'btn btn-sm btn-danger' target="_blank">  <!-- targe is for opening a  new window-->
+                  Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+
+<h2>Embedded Text Files</h2>
+<table class="table">
+     
+    <thead>
+        <tr>
+            <th>Media Type</th>
+            <th>Watermark Information</th>
+            <th>Hash Information</th>
+            <th>Download File</th>
+            <th>Delete File</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for uploaded_text in uploaded_texts %}
+        <tr>
+            <td>
+                {% if uploaded_text.file%}<!-- File in this case in the file route-->
+                <img src="{% static 'site_images/pdf_icon.png' %}" alt="Text File/Audio File" style="width: 60px;">
+                {%else%}
+                <span class="text-muted">No Cover</span>
+                {% endif %}
+            </td>
+            <td>{{ uploaded_text.info}}</td>
+            <td>{{ uploaded_text.hash}}</td>
+            <td>
+                <a href="{{uploaded_text.file.url}}" class = 'btn btn-sm btn-info' target="_blank"> <!-- targe is for opening a  new window-->
+                  Download 
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'delete_file' uploaded_text.hash_url %}" class = 'btn btn-sm btn-danger' target="_blank">  <!-- targe is for opening a  new window-->
+                  Delete
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+{% endblock %}
+

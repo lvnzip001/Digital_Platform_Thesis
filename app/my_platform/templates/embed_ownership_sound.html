@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+
+{% load crispy_forms_tags %}
+<h2>Embed ownership</h2>
+<hr>
+<p> 
+    This file is for embedding ownership for a sound document
+</p>
+
+<p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class = 'btn-outline-info  btn-sm btn-block' style="height:40px;width:100px;"text-align="center" >Embed File</button>
+    </form>
+</p>
+<p>
+    <a href="{% url 'embed_ownership' %} " class = 'btn btn-warning' style="height:40px;width:100px;" text-align="center" >&#8592; Return </a>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

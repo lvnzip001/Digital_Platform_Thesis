@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+
+
+<hr>
+<p> 
+    <p>OOPS... Something went wrong, please check your inputs...</p> 
+    <p>If problem persists please contact admin at: lvnzip001@myuct.ac.za</p>
+    <p><a class="btn btn-warning" href="{% url 'index' %}"> &#8592; Back to Home</a></p>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+{% load crispy_forms_tags %}
+<h2>Extract Embedded Information</h2>
+<hr>
+<p> 
+    Upload the file that you need to extract Embedded Information
+</p>
+<p>
+    <span><form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+    <span><button type="submit" class = 'btn btn-outline-info  btn-sm btn-block' text-align="center">Extract</button></span>
+    </form></span>
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<br>
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12">
+        <div class="card mb">
+          <div class="card-body">
+<p>
+    {% if last_object.file%}<!-- File in this case in the file route-->
+    <img src="{{last_object.file.url}}" alt="Text File/Audio File" style="width: 120px;">
+    <span class>      </span>
+    <span class><b>&nbsp;&nbsp;&nbsp;&nbsp; File Embedded Message:&nbsp;&nbsp; </b></span>
+    <span ><b><i>{{last_object.info}}</i></b></span>
+    <p><button type="submit" class = 'btn btn-outline-info  btn-sm btn-block' text-align="center">Verify Owner</button></p>
+    {%else%}
+    <span class="text-muted">No Cover</span>
+    
+    {% endif %}
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

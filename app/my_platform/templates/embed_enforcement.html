@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-md-12">
+        <div class="card mb-4">
+          <div class="card-body">
+<center>
+<h2>Embed enforcement</h2>
+<hr>
+<p> 
+    Choose a media type to embed
+</p>
+
+<p>
+    <a href="{% url 'embed_enforcement_text' %} " class = 'btn btn-primary' style="height:100px;width:200px;" text-align="center" >Text File</a>
+    <a href="{% url 'embed_enforcement_image' %} " class = 'btn btn-primary' style="height:100px;width:200px;" text-align="center" >Image File</a>
+    <a href="{% url 'embed_enforcement_sound' %} " class = 'btn btn-primary' style="height:100px;width:200px;" text-align="center" >Sound File</a>
+</p>
+</center>
+<p> 
+    This is for enforcing enforcement in the case where the is a owner is sending the file to someone
+</p>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

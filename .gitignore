@@ -1,0 +1,9 @@
+/env
+/staticfiles/admin/
+app/staticfiles/admin/
+/app/media/documents
+/app/media/extraction_files
+/app/media/photos
+/app/media/text
+
+

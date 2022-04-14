@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+      <div class="card mb-4">
+        <div class="card-body">
+
+  <h2 class="card-title">A Platform to Manage Digital Property Rights</h2>
+  <hr>
+  <p class="card-text">Built on Python and Django Framework</p>
+  <p class="card-text">
+    Read Weekly Reports <a href="https://docs.google.com/document/d/1lYPGJRohpiooDSPPFESAk6XxvrisocHhGvNFLeGQpT0/edit?userstoinvite=cogeorg%40gmail.com"> Weekly Reports</span></a> or
+    Access to Thesis <a href="https://www.overleaf.com/7959138165pxxqgzvqwsvd " target="_blank">Thesis Document</a>.
+  <br>
+  </p>
+  <p class="card-text">
+    <br>
+    {% if request.user.is_authenticated %}
+    Welcome to the digital ownership platform. Get started and claim ownership.
+    {%else%}
+    Login to account to use services:
+    <a href="{% url 'login' %}" class = "btn btn-outline-info  btn-sm btn-block" style="height:30px;width:115px;" text-align="center">Login</a>
+    {% endif %}
+  </p>
+    
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<center><img src="{% static 'site_images/uct_logo.png' %}" alt="Text File/Audio File" style="width: 350px;"></center>
+
+{% endblock %}

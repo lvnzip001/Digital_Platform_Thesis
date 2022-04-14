@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+
+<p>Are you sure you want to delete file <b> {{file_to_delete.file}}</b>?</p>
+<div class="row" >
+    <div class="col-xs-2">
+        <form action="{% url 'delete_file' file_to_delete.hash_url %}" method="post">
+            {% csrf_token %}        
+            <button type="submit" class = 'btn-outline-danger  btn-sm btn-block' style="height:40px;width:100px;"text-align="center" >Delete</button>
+        </form>
+    </div>
+    &nbsp&nbsp&nbsp<div class="col-xs-8">
+            <a href="{% url 'embedded_files' %} " class = 'btn btn-outline-info  btn-sm btn-block' style="height:40px;width:100px;"text-align="center">Cancel</a>
+    </div>
+</div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>            
+
+
+{% endblock %}
