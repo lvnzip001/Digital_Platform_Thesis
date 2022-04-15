@@ -411,8 +411,13 @@ def embedded_files(request):
                     
                     embedded_sound_file = f"{uploaded_file.file}".split('/')[-1]
                     embedded_sound_location = 'sound/' + 'encoded' + embedded_sound_file
+                    print( embedded_sound_location)
                     
-                    uploaded_file.hash = get_hash(MEDIA_ROOT + embedded_sound_location)
+                    try:
+                        uploaded_file.hash = get_hash(MEDIA_ROOT + embedded_sound_location)
+                    except:
+                        uploaded_file.hash = "hash broken"
+                    print(uploaded_file.hash)
 
                     uploaded_sounds.append(uploaded_file)
                     print(uploaded_file.owner)
