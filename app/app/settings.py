@@ -149,6 +149,7 @@ STATICFILES_DIRS = (
 )
 MEDIA_URL = '/media/'
 
+AUDIO_ROOT = os.path.join(BASE_DIR, 'my_platform/audiowatermarking')
 #STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app/media')]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  # base_dir is where we are at
