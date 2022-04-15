@@ -134,5 +134,60 @@
 
 
 
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+      <div class="card mb-4">
+        <div class="card-body">
+
+<h2>Embedded Sound Files</h2>
+<table class="table">
+   
+  <thead>
+      <tr>
+          <th>Media Type</th>
+          <th>Watermark Information</th>
+          <th>Hash Information</th>
+          <th>Download File</th>
+          <th>Delete File</th>
+
+      </tr>
+  </thead>
+  <tbody>
+      {% for uploaded_sound in uploaded_sounds %}
+      <tr>
+          <td>
+              {% if uploaded_sound.file%}<!-- File in this case in the file route-->
+              <img src="{% static 'site_images/audio2.png' %}" alt="Text File/Audio File" style="width: 60px;">
+              {%else%}
+              <span class="text-muted">No Cover</span>
+              {% endif %}
+          </td>
+          <td>{{ uploaded_sound.owner}}</td>
+          <td>{{ uploaded_sound.hash}}</td>
+          <td>
+              <a href="{{uploaded_sound.file.url}}" class = 'btn btn-sm btn-info' target="_blank"> <!-- targe is for opening a  new window-->
+                Download 
+              </a>
+          </td>
+          <td>
+              <a href="{% url 'delete_file' uploaded_sound.hash_url %}" class = 'btn btn-sm btn-danger' target="_blank">  <!-- targe is for opening a  new window-->
+                Delete
+              </a>
+          </td>
+      </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
 {% endblock %}
 
