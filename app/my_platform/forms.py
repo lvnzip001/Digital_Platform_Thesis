@@ -45,9 +45,9 @@ class Embed_Enforcement_Image_Form(forms.ModelForm):
 
 class Embed_Enforcement_Sound_Form(forms.ModelForm):
     Pass
-#    class Meta:
-#        model = Embed_Ownership_Sound
-#        fields = ('owner','receiver', 'file')
+    class Meta:
+        model = Embed_Enforcement_Sound
+        fields = '__all__'
 
 class Extract_Embedded_Info_Form(forms.ModelForm):
     class Meta:
