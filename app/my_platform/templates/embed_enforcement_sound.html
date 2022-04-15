@@ -22,8 +22,6 @@
         <div class="card mb-4">
           <div class="card-body">
 
-
-{% load crispy_forms_tags %}
 <h2>Embed enforcement</h2>
 <hr>
 <p> 
@@ -47,5 +45,34 @@
 </div>
 </div>
 </div>
+
+<div>
+
+    {% for message in messages %}
+      <center><p id ="messages">{{message}}</p></center>
+    {% endfor %}
+    </div>
+    
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10 col-md-12">
+            <div class="card mb">
+              <div class="card-body">
+                <p>
+                    {% if last_object.file%}<!-- File in this case in the file route-->
+                    <img src="{% static 'site_images/audio2.png' %}" alt="Text File/Audio File" style="width: 120px;">
+                    <span class>      </span>
+                    <span class><b>&nbsp;&nbsp;&nbsp;&nbsp; Embedded Message:</b> This document belongs to {{last_object.owner}}&nbsp;&nbsp; </span>
+                    <span ><b><i>{{last_object.info}}</i></b></span>
+                    <p><a href="{% url 'embedded_files' %} " class = 'btn btn-sm btn-info' style="height:40px;width:130px;" text-align="center" >Embedded Files </a></p>
+                    {%else%}
+                    <span class="text-muted">No Cover</span>
+                    {% endif %}
+                </p>
+               </div>
+            </div>
+          </div>
+        </div>
+    </div>
 
 {% endblock %}
