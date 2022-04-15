@@ -5,5 +5,5 @@ app/staticfiles/admin/
 /app/media/extraction_files
 /app/media/photos
 /app/media/text
-
+/app/media/sound
 
