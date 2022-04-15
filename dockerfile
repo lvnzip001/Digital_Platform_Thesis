@@ -1,4 +1,4 @@
-FROM python:3.9-alpine
+FROM python:3.8.1-alpine3.11
 LABEL maintainer="lvnzip001@myuct.ac.za"
 ENV PYTHONUNBUFFERED 1
 RUN mkdir /
