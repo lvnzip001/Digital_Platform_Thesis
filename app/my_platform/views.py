@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user
 
+from my_platform.audiowatermarking.spectrum_ import embed_sound, move_sound_dep
 from my_platform.mysql_connector import open_db_conn, close_db_conn
 from my_platform.image_watermark_embed import watermark_embed
 from my_platform.image_watermark_extract import watermark_extract
@@ -24,7 +25,8 @@ from my_platform.hash import get_hash
 import datetime
 import io
 import sys
-from app.settings import MEDIA_ROOT
+from app.settings import MEDIA_ROOT, AUDIO_ROOT
+
 
 def index(request):
     return render(request, 'home.html')
@@ -98,7 +100,6 @@ def account_profile(request):
         return render(request, 'account_profile.html', context)
 
 
-
 def about_us(request):
     return render(request, 'about_us.html')
 
@@ -106,8 +107,10 @@ def about_us(request):
 def services(request):
     return render(request, 'services.html')
 
+
 def error(request):
     return render(request, 'error.html')
+
 
 @login_required(login_url='login')
 def menu_embed(request):
@@ -143,12 +146,13 @@ def embed_ownership_text(request):
             watermarkInfo = embed_info_1 + "_" + embed_info_2
 
             pdf_embed_watermark(last_object_location,
-                            watermarkInfo, last_object_location)
+                                watermarkInfo, last_object_location)
             last_object.hash = get_hash(last_object_location)
 
-            messages.success(request, 'File has been embedded  ' + current_user_info.name +'. Go to Embedded Files to download document. ')
-            return render(request, 'embed_ownership_text.html', {'last_object': last_object, 'form': form,'watermarkInfo':watermarkInfo})
-        
+            messages.success(request, 'File has been embedded  ' +
+                             current_user_info.name + '. Go to Embedded Files to download document. ')
+            return render(request, 'embed_ownership_text.html', {'last_object': last_object, 'form': form, 'watermarkInfo': watermarkInfo})
+
     else:
         #
         form = Embed_Ownership_Image_Form(
@@ -156,23 +160,20 @@ def embed_ownership_text(request):
         form.fields['user_info']._queryset = current_user_info
 
     return render(request, 'embed_ownership_text.html', {'form': form})
-    
+
 
 @login_required(login_url='login')
 def embed_ownership_image(request):
-    
+
     # information regarding the current user
-    current_user_info = request.user.user_info         #this works
-    print('do we even get here')
+    current_user_info = request.user.user_info
+
     if request.method == 'POST':
-        print('know we say this is a post')
+
         form = Embed_Ownership_Image_Form(request.POST, request.FILES,)
         if form.is_valid():
-            if str(Embed_Ownership_Image.objects.all().last().file) =="":
-                return render(request, 'error.html')
-            
             form.save()
-            
+
             last_object = Embed_Ownership_Image.objects.all().last()
             # last_object_location = Path.cwd()/"media"/f"{last_object.file}"
             last_object_location = MEDIA_ROOT + f"{last_object.file}"
@@ -187,23 +188,24 @@ def embed_ownership_image(request):
 
             # write information to myAdmin Sql
             mydb, mycursor = open_db_conn()
-            sql ="INSERT INTO digital_ownership_tbl (user_info,file,embedded_watermark,hash,owner) VALUES(%s,%s,%s,%s,%s)"
-            
+            sql = "INSERT INTO digital_ownership_tbl (user_info,file,embedded_watermark,hash,owner) VALUES(%s,%s,%s,%s,%s)"
+
             user_info = str(current_user_info)
             file = str(last_object.file)
             embedded_watermark = watermarkInfo
             hash = last_object.hash
             owner = last_object.owner
 
-            val =(user_info,file,embedded_watermark,hash,owner)
-            mycursor.execute(sql,val)
+            val = (user_info, file, embedded_watermark, hash, owner)
+            mycursor.execute(sql, val)
             mydb.commit()
-            
+
             close_db_conn(mydb, mycursor)
 
-            messages.success(request, 'File has been embedded  ' + current_user_info.name +'. Go to Embedded Files to download document. ')
-            return render(request, 'embed_ownership_image.html', {'last_object': last_object, 'form': form,'watermarkInfo':watermarkInfo})
-        
+            messages.success(request, 'File has been embedded  ' +
+                             current_user_info.name + '. Go to Embedded Files to download document. ')
+            return render(request, 'embed_ownership_image.html', {'last_object': last_object, 'form': form, 'watermarkInfo': watermarkInfo})
+
     else:
         #
         form = Embed_Ownership_Image_Form(
@@ -215,18 +217,43 @@ def embed_ownership_image(request):
 
 @login_required(login_url='login')
 def embed_ownership_sound(request):
+    # information regarding the current user
+    current_user_info = request.user.user_info
     if request.method == 'POST':
-        form = Embed_Ownership_Sound_Form(request.POST, request.FILES)
+
+        form = Embed_Ownership_Sound_Form(request.POST, request.FILES,)
         if form.is_valid():
             form.save()
-            return HttpResponse("File uploaded to be embedded.")
+
+            try:
+
+                # We dont do the normal embedding this side, we use the hash
+                last_object = Embed_Ownership_Sound.objects.all().last()
+                last_object_location = MEDIA_ROOT + f"{last_object.file}"
+                embed_sound(last_object_location, 'host1.wav')
+                raw__file = f"{last_object.file}".split('/')[-1]
+                file_name = "encoded" + raw__file
+
+                # move file to relevant folder
+                move_sound_dep(raw__file, file_name)
+
+                messages.success(request, 'File has been embedded  ' +
+                                 current_user_info.name + '. Go to Embedded Files to download document. ')
+                return render(request, 'embed_ownership_sound.html', {'last_object': last_object, 'form': form})
+
+            except:
+                return HttpResponse("File failure to upload")
+
     else:
-        form = Embed_Ownership_Sound_Form()
-    return render(request, 'embed_ownership_sound.html', {'form': form})
+        # return HttpResponse("Something up with the form")
+        form = Embed_Ownership_Image_Form(
+            initial={'user_info': current_user_info})
+        form.fields['user_info']._queryset = current_user_info
+
+        return render(request, 'embed_ownership_sound.html', {'form': form})
 
 
 @login_required(login_url='login')
-
 def embed_enforcement_text(request):
     current_user_info = request.user.user_info
     if request.method == 'POST':
@@ -240,21 +267,22 @@ def embed_enforcement_text(request):
             embed_info_2 = str(datetime.datetime.now())
             embed_info_3 = f"{last_object.receiver}"
             watermarkInfo = embed_info_1 + "-" + embed_info_3 + "_" + embed_info_2
-            
 
             pdf_embed_watermark(last_object_location,
-                            watermarkInfo, last_object_location)
+                                watermarkInfo, last_object_location)
 
             last_object.hash = get_hash(last_object_location)
 
-            messages.success(request, 'File has been embedded  ' + current_user_info.name +'. Go to Embedded Files to download document. ')
-            return render(request, 'embed_enforcement_text.html', {'last_object': last_object, 'form': form,'watermarkInfo':watermarkInfo})
+            messages.success(request, 'File has been embedded  ' +
+                             current_user_info.name + '. Go to Embedded Files to download document. ')
+            return render(request, 'embed_enforcement_text.html', {'last_object': last_object, 'form': form, 'watermarkInfo': watermarkInfo})
     else:
         form = Embed_Enforcement_Text_Form(
             initial={'user_info': current_user_info})
         form.fields['user_info']._queryset = current_user_info
-    
+
     return render(request, 'embed_enforcement_text.html', {'form': form})
+
 
 @login_required(login_url='login')
 def embed_enforcement_image(request):
@@ -263,9 +291,9 @@ def embed_enforcement_image(request):
     if request.method == 'POST':
         form = Embed_Enforcement_Image_Form(request.POST, request.FILES)
         if form.is_valid():
-            if str(Embed_Enforcement_Image.objects.all().last().file) =="":
+            if str(Embed_Enforcement_Image.objects.all().last().file) == "":
                 return render(request, 'error.html')
-                
+
             form.save()
             last_object = Embed_Enforcement_Image.objects.all().last()
             last_object_location = MEDIA_ROOT + f"{last_object.file}"
@@ -277,28 +305,56 @@ def embed_enforcement_image(request):
 
             watermark_embed(last_object_location,
                             watermarkInfo, last_object_location)
-            last_object.hash = get_hash(last_object_location)  
+            last_object.hash = get_hash(last_object_location)
 
-            messages.success(request, 'File has been embedded  ' + current_user_info.name +'. Go to Embedded Files to download document. ')
-            return render(request, 'embed_enforcement_image.html', {'last_object': last_object, 'form': form,'watermarkInfo':watermarkInfo})
+            messages.success(request, 'File has been embedded  ' +
+                             current_user_info.name + '. Go to Embedded Files to download document. ')
+            return render(request, 'embed_enforcement_image.html', {'last_object': last_object, 'form': form, 'watermarkInfo': watermarkInfo})
     else:
         form = Embed_Enforcement_Image_Form(
             initial={'user_info': current_user_info})
         form.fields['user_info']._queryset = current_user_info
-    
+
     return render(request, 'embed_enforcement_image.html', {'form': form})
 
 
 @login_required(login_url='login')
 def embed_enforcement_sound(request):
+    # information regarding the current user
+    current_user_info = request.user.user_info
     if request.method == 'POST':
-        form = Embed_Enforcement_Sound_Form(request.POST, request.FILES)
+
+        form = Embed_Enforcement_Sound_Form(request.POST, request.FILES,)
         if form.is_valid():
             form.save()
-            return HttpResponse("File uploaded to be embedded.")
+
+            try:
+
+                # We dont do the normal embedding this side, we use the hash
+                last_object = Embed_Enforcement_Sound.objects.all().last()
+                last_object_location = MEDIA_ROOT + f"{last_object.file}"
+                embed_sound(last_object_location, 'host1.wav')
+                raw__file = f"{last_object.file}".split('/')[-1]
+                file_name = "encoded" + raw__file
+
+                # move file to relevant folder
+                move_sound_dep(raw__file, file_name)
+
+                messages.success(request, 'File has been embedded  ' +
+                                 current_user_info.name + '. Go to Embedded Files to download document. ')
+                return render(request, 'embed_enforcement_sound.html', {'last_object': last_object, 'form': form})
+
+            except:
+                return HttpResponse("File failure to upload")
+
     else:
-        form = Embed_Enforcement_Sound_Form()
-    return render(request, 'embed_enforcement_sound.html', {'form': form})
+        # return HttpResponse("Something up with the form")
+        form = Embed_Enforcement_Image_Form(
+            initial={'user_info': current_user_info})
+        form.fields['user_info']._queryset = current_user_info
+
+        return render(request, 'embed_enforcement_sound.html', {'form': form})
+
 
 def embedded_files(request):
     if request.user.is_authenticated:
@@ -306,42 +362,71 @@ def embedded_files(request):
         try:
             current_user_info = request.user.user_info
             current_user_id = request.user.user_info.id
-    
-            
-            uploaded_files_list = Embed_Ownership_Image.objects.all()
-            #embed_enforcement_image = Embed_Enforcement_Image.objects.all()
-            #uploaded_files_list = list(
-            #    chain(embed_ownership_image,embed_enforcement_image))
+
+            embed_ownership_image = Embed_Ownership_Image.objects.all()
+            embed_enforcement_image = Embed_Enforcement_Image.objects.all()
+            uploaded_files_list = list(
+                chain(embed_ownership_image, embed_enforcement_image))
 
             uploaded_files = []
 
             for uploaded_file in uploaded_files_list:
                 if uploaded_file.user_info_id == current_user_id:
-                    uploaded_file.info = watermark_extract(MEDIA_ROOT + f"{uploaded_file.file}")
-                    uploaded_file.hash = get_hash(MEDIA_ROOT + f"{uploaded_file.file}")
+                    uploaded_file.info = watermark_extract(
+                        MEDIA_ROOT + f"{uploaded_file.file}")
+                    uploaded_file.hash = get_hash(
+                        MEDIA_ROOT + f"{uploaded_file.file}")
                     uploaded_files.append(uploaded_file)
 
-            """ the idea is to do PDF embedding first"""
-            uploaded_texts_list = Embed_Ownership_Text.objects.all()
-            #embed_enforcement_text = Embed_Enforcement_Text.objects.all()
-            #uploaded_texts_list = list(
-            #    chain(embed_ownership_text,embed_enforcement_text))
+            """ PDF embedding """
+            embed_ownership_text = Embed_Ownership_Text.objects.all()
+            embed_enforcement_text = Embed_Enforcement_Text.objects.all()
+            uploaded_texts_list = list(
+                chain(embed_ownership_text, embed_enforcement_text))
 
             uploaded_texts = []
-              
+
             for uploaded_file in uploaded_texts_list:
                 if uploaded_file.user_info_id == current_user_id:
-                    
-                    uploaded_file.info = pdf_extract_watermark(MEDIA_ROOT + f"{uploaded_file.file}")
-                    uploaded_file.hash = get_hash(MEDIA_ROOT + f"{uploaded_file.file}")
-                    
-                    print(uploaded_file.info)    
+
+                    uploaded_file.info = pdf_extract_watermark(
+                        MEDIA_ROOT + f"{uploaded_file.file}")
+                    uploaded_file.hash = get_hash(
+                        MEDIA_ROOT + f"{uploaded_file.file}")
+
+                    print(uploaded_file.info)
                     uploaded_texts.append(uploaded_file)
-           # breakpoint()
-            return render(request, 'embedded_files.html', {'uploaded_files': uploaded_files, 'uploaded_texts':uploaded_texts})
+            print(111111111111111111)
+            """ Sound embedding """
+            embed_ownership_sound = Embed_Ownership_Sound.objects.all()
+            embed_enforcement_sound = Embed_Enforcement_Sound.objects.all()
+            uploaded_sounds_list = list(
+                chain(embed_ownership_sound, embed_enforcement_sound))
+            
+            """Stored file for the sound is abit different so need to create the name"""
+            uploaded_sounds = []
+            print(111111111111111111)
+            for uploaded_file in uploaded_sounds_list:
+                if uploaded_file.user_info_id == current_user_id:
+                    
+                    embedded_sound_file = f"{uploaded_file.file}".split('/')[-1]
+                    embedded_sound_location = 'sound/' + 'encoded' + embedded_sound_file
+                    
+                    uploaded_file.hash = get_hash(MEDIA_ROOT + embedded_sound_location)
+
+                    uploaded_sounds.append(uploaded_file)
+                    print(uploaded_file.owner)
+                    print(embedded_sound_location)
+            
+            
+           
+            return render(request, 'embedded_files.html', {'uploaded_files': uploaded_files, 
+                                                        'uploaded_texts': uploaded_texts, 
+                                                        'uploaded_sounds': uploaded_sounds})
 
         except:
-            print('WHAT THE ACTUAL FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK')
+            print(
+                'WHAT THE ACTUAL FUCKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK')
             uploaded_files = []
             return render(request, 'embedded_files.html', {'uploaded_files': uploaded_files})
     else:
@@ -399,7 +484,15 @@ def delete_file(request, hash_url):
         file_to_delete = Embed_Enforcement_Text.objects.get(hash_url=hash_url)
     except:
         pass
-   
+    try:
+        file_to_delete = Embed_Enforcement_Sound.objects.get(hash_url=hash_url)
+    except:
+        pass
+    try:
+        file_to_delete = Embed_Ownership_Sound.objects.get(hash_url=hash_url)
+    except:
+        pass
+
 
     if request.method == 'POST':
 
