@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+{% load static %}
 <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10 col-md-12">
@@ -31,6 +31,23 @@
 </div>
 </div>
 </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+
+<div class="center">
+  <div class="row justify-content-center">
+   <div class="col-md-1 col-centered">
+    <img src="{% static 'site_images/site_logo.png' %}" alt="Site Logo" style="width: 60px;">
+    </div>
+    <div class="col-md-1 col-centered">
+     <img src="{% static 'site_images/uct_logo_1.png' %}" alt="Site Logo" style="width: 64px;">
+    </div>
+  </div>
+  <center><p><i>--  A Digital Ownership Platform  --&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></p></center>
+  </div>
 </div>
 
 {% endblock %}
