@@ -57,7 +57,7 @@ class Embed_Ownership_Text(models.Model):
     user_info =  models.ForeignKey(User_Info, null=True, on_delete= models.SET_NULL,max_length=1)
     created_on = models.DateTimeField(auto_now_add=True)
     owner = models.CharField(max_length=100)
-    file = models.FileField(upload_to='text/')
+    file = models.FileField(upload_to='text/',null=False,blank=False)
     hash_url = models.CharField(max_length=50,default=_createHash,editable=False)
 
 class Embed_Ownership_Image(models.Model):
@@ -74,7 +74,7 @@ class Embed_Ownership_Sound(models.Model):
     user_info =  models.ForeignKey(User_Info, null=True, on_delete= models.SET_NULL,max_length=1)
     created_on = models.DateTimeField(auto_now_add=True)
     owner = models.CharField(max_length=100)
-    file = models.FileField(upload_to = 'sound/',null=True,blank=True)
+    file = models.FileField(upload_to = 'sound/',null=False,blank=False)
     hash_url = models.CharField(max_length=50,default=_createHash,editable=False)
 
 
@@ -83,7 +83,7 @@ class Embed_Enforcement_Text(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     owner = models.CharField(max_length=100)
     receiver = models.CharField(max_length=100)
-    file = models.FileField(upload_to='text/')
+    file = models.FileField(upload_to='text/',null=False,blank=False)
     hash_url = models.CharField(max_length=50,default=_createHash,editable=False)
 
 class Embed_Enforcement_Image(models.Model):
@@ -91,7 +91,7 @@ class Embed_Enforcement_Image(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     owner = models.CharField(max_length=100)
     receiver = models.CharField(max_length=100)
-    file = models.ImageField(upload_to = UploadToPathAndRename,null=True,blank=True)
+    file = models.ImageField(upload_to = UploadToPathAndRename,null=False,blank=False)
     hash_url = models.CharField(max_length=50,default=_createHash,editable=False)
 
 class Embed_Enforcement_Sound(models.Model):
@@ -99,13 +99,13 @@ class Embed_Enforcement_Sound(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     owner = models.CharField(max_length=100)
     receiver = models.CharField(max_length=100)
-    file = models.FileField(upload_to = 'sound/',null=True,blank=True)
+    file = models.FileField(upload_to = 'sound/',null=False,blank=False)
     hash_url = models.CharField(max_length=50,default=_createHash,editable=False)
 
 class Extract_Embedded_Info(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     source_file = models.CharField(max_length=100,default="Extraction File")
-    file = models.FileField(upload_to='extraction_files/')
+    file = models.FileField(upload_to='extraction_files/',null=False,blank=False)
 #querySet1.union(querySet2, querySet3, etc) #Minimum 1 argument
 
 class Embedded_Files(models.Model):
