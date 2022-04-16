@@ -34,15 +34,6 @@ def _createHash():
 
         return("%032x" % hash)
 
-class Book(models.Model):
-    title = models.CharField(max_length=100)
-    author = models.CharField(max_length=100)
-    pdf = models.FileField(upload_to='books/pdfs/')
-    cover = models.ImageField(upload_to = 'books/covers',null=True,blank=True)
-
-    def __str__(self):
-        return self.title
-
 class User_Info(models.Model):
     user = models.OneToOneField(User,null=False, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
@@ -102,11 +93,20 @@ class Embed_Enforcement_Sound(models.Model):
     file = models.FileField(upload_to = 'sound/',null=False,blank=False)
     hash_url = models.CharField(max_length=50,default=_createHash,editable=False)
 
-class Extract_Embedded_Info(models.Model):
+class Extract_Embedded_Text(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     source_file = models.CharField(max_length=100,default="Extraction File")
-    file = models.FileField(upload_to='extraction_files/',null=False,blank=False)
-#querySet1.union(querySet2, querySet3, etc) #Minimum 1 argument
+    file = models.FileField(upload_to='extraction_files/text',null=False,blank=False)
+
+class Extract_Embedded_Image(models.Model):
+    created_on = models.DateTimeField(auto_now_add=True)
+    source_file = models.CharField(max_length=100,default="Extraction File")
+    file = models.FileField(upload_to='extraction_files/image',null=False,blank=False)
+
+class Extract_Embedded_Sound(models.Model):
+    created_on = models.DateTimeField(auto_now_add=True)
+    source_file = models.CharField(max_length=100,default="Extraction File")
+    file = models.FileField(upload_to='extraction_files/sound',null=False,blank=False)
 
 class Embedded_Files(models.Model):
     user_info =  models.ForeignKey(User_Info, null=True, on_delete= models.SET_NULL)

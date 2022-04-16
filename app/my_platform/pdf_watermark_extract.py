@@ -7,12 +7,15 @@ def pdf_extract_watermark(file_watermarked):
     pdf_input = PyPDF2.PdfFileReader(open(file_watermarked, 'rb'))
     pageNum = pdf_input.getNumPages()
     extractedText = pdf_input.getPage(pageNum - 1).extractText()
-    watermarkInfo = extractedText.split()[-1]
-    result = watermarkInfo.split("-")     # split into 3 variables if we have a resource ID 
+    watermarkInfo_list = extractedText.split()
+
+    def listToString(watermark_list):
+        # initialize an empty string
+        str1 = ""
+        return (str1.join(watermark_list))
+    result = listToString(watermarkInfo_list)
+    
     try:
         return result
-
-    except: 
+    except:
         return('No watermark imformation found, please make sure you have the correct file')
-
-

@@ -1,7 +1,7 @@
 from ast import Pass
 from pyexpat import model
 from django import forms
-from .models import Book, Embed_Ownership_Text, Embed_Ownership_Image, Embed_Enforcement_Sound, Embed_Enforcement_Text, Embed_Enforcement_Image,Embed_Ownership_Sound,Extract_Embedded_Info,User_Info
+from .models import  Embed_Ownership_Text, Embed_Ownership_Image, Embed_Enforcement_Sound, Embed_Enforcement_Text, Embed_Enforcement_Image,Embed_Ownership_Sound,User_Info,Extract_Embedded_Text,Extract_Embedded_Sound,Extract_Embedded_Image
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -49,7 +49,17 @@ class Embed_Enforcement_Sound_Form(forms.ModelForm):
         model = Embed_Enforcement_Sound
         fields = '__all__'
 
-class Extract_Embedded_Info_Form(forms.ModelForm):
+class Extract_Embedded_Sound_Form(forms.ModelForm):
     class Meta:
-        model = Extract_Embedded_Info
+        model = Extract_Embedded_Sound
+        fields = ('source_file','file')
+
+class Extract_Embedded_Image_Form(forms.ModelForm):
+    class Meta:
+        model = Extract_Embedded_Image
+        fields = ('source_file','file')
+
+class Extract_Embedded_Text_Form(forms.ModelForm):
+    class Meta:
+        model = Extract_Embedded_Text
         fields = ('source_file','file')
