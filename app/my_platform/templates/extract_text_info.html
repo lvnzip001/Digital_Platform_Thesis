@@ -23,23 +23,21 @@
           <div class="card-body">
 
 
-<h2>Embed Ownership Text</h2>
+<h2>Extract Text Information</h2>
 <hr>
 <p> 
-    This file is for embedding ownership for a text document
+    This file is for embedding enforcement for a text document
 </p>
 
 <p>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form|crispy}}
-    <button type="submit" class = 'btn-outline-info  btn-sm btn-block' style="height:40px;width:100px;"text-align="center" >Embed File</button>
-</form>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type="submit" class = "btn btn-outline-danger  btn-sm btn-block" style="height:40px;width:100px;" text-align="center">Extract</button>
+    </form>
 </p>
-
 <p>
-    <a href="{% url 'embed_ownership' %} " class = 'btn btn-warning' style="height:40px;width:100px;" text-align="center" >&#8592; Return </a>
-    
+    <a href="{% url 'embed_enforcement' %} " class = 'btn btn-primary' style="height:50px;width:100px;" text-align="center" >Return</a>
 </p>
 
 </div>
@@ -94,7 +92,7 @@
                         
                         
                     </td>
-                    <td>{{ watermarkInfo}}</td>
+                    <td>{{ last_object.info}}</td>
                     <td>{{ last_object.hash}}</td>
                    
                 </tr>
@@ -102,13 +100,12 @@
             </tbody>
         </table>
         <br>
-        <p><a href="{% url 'embedded_files' %} " class = 'btn btn-sm btn-info' style="height:40px;width:130px;" text-align="center" >Embedded Files </a></p>
+        <p><a href="{% url 'embedded_files' %} " class = 'btn btn-sm btn-info' style="height:40px;width:130px;" text-align="center" >Verify Occurrence </a></p>
         {% endif %}
 </div>
 </div>
 </div>
 </div>
 </div>
-
 
 {% endblock %}
