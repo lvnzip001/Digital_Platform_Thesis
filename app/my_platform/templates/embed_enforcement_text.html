@@ -52,26 +52,59 @@
 {% endfor %}
 </div>
 
-<div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-10 col-md-12">
-        <div class="card mb">
-          <div class="card-body">
-<p>
-    {% if last_object.file%}<!-- File in this case in the file route-->
-    <img src="{% static 'site_images/pdf_icon.png' %}" alt="Text File/Audio File" style="width: 120px;">
-    <span class>      </span>
-    <span class><b>&nbsp;&nbsp;&nbsp;&nbsp; Embedded Message:</b> {{watermarkInfo}}&nbsp;&nbsp; </span>
-    <span ><b><i>{{last_object.info}}</i></b></span>
-    <p><a href="{% url 'embedded_files' %} " class = 'btn btn-sm btn-info' style="height:40px;width:130px;" text-align="center" >Embedded Files </a></p>
-    {%else%}
-    <span class="text-muted">No Cover</span>
-    {% endif %}
-</p>
-</div>
-</div>
-</div>
-</div>
-</div>
+<style>
+  table {
+    border-spacing: 0px;
+    table-layout: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+  }
+  td {
 
+    word-break: break-all;
+  }
+</style>
+
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+      <div class="card mb">
+        <div class="card-body">
+          <table class="table">
+
+            {% if last_object.file%}
+            <thead>
+                <tr>
+                    <th>Media Type</th>
+                    <th>Watermark Information</th>
+                    <th>Hash Information</th>
+                    
+        
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        
+                        <img src="{% static 'site_images/pdf_icon.png' %}" alt="Text File/Audio File" style="width: 60px;">
+                        
+                        
+                    </td>
+                    <td>{{ watermarkInfo}}</td>
+                    <td>{{ last_object.hash}}</td>
+                   
+                </tr>
+                
+            </tbody>
+        </table>
+        <br>
+        <p><a href="{% url 'embedded_files' %} " class = 'btn btn-sm btn-info' style="height:40px;width:130px;" text-align="center" >Embedded Files </a></p>
+        {% endif %}
+</div>
+</div>
+</div>
+</div>
+</div>
 {% endblock %}
