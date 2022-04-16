@@ -25,9 +25,6 @@ urlpatterns = [
     path('extract_text_info/',views.extract_text_info, name='extract_text_info'),
     path('extract_sound_info/',views.extract_sound_info, name='extract_sound_info'),
     path('extract_image_info/',views.extract_image_info, name='extract_image_info'),
-
-
-    path('extract_embedded_info/',views.extract_embedded_info, name='extract_embedded_info'),
     path('delete_file/<str:hash_url>',views.delete_file,name='delete_file')
     
 ]

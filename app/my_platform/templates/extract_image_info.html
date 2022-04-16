@@ -79,6 +79,7 @@
             <thead>
                 <tr>
                     <th>Media Type</th>
+                    <th>Uploaded file</th>
                     <th>Watermark Information</th>
                     <th>Hash Information</th>
                     
@@ -93,6 +94,7 @@
                         
                         
                     </td>
+                    <td>{{ last_object.uploaded_filename}}</td>
                     <td>{{ last_object.info}}</td>
                     <td>{{ last_object.hash}}</td>
                    
@@ -100,14 +102,70 @@
                 
             </tbody>
         </table>
-        <br>
-        <p><a href="{% url 'embedded_files' %} " class = 'btn btn-sm btn-info' style="height:40px;width:130px;" text-align="center" >Verify Occurrence </a></p>
-        
+      
 </div>
 </div>
 </div>
 </div>
 </div>
 {% endif %}
+<br>
+<br>
+
+<style>
+  table {
+    border-spacing: 0px;
+    table-layout: auto;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+  }
+  td {
+
+    word-break: break-all;
+  }
+</style>
+
+{% if last_object.file%}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12">
+      <div class="card mb">
+        <div class="card-body">
+          <table class="table">
+
+            
+            <thead>
+                <h3>
+                    File Origin Data
+                </h3>
+                <hr>
+            </thead>
+            <tbody>
+                
+                    <p><span><b>Owner:</b></span> {{ last_object.owner}}</p>
+                    <p><span><b>Timestamp:</b></span> {{ last_object.Timestamp }}</p>
+                    <p><span><b>Email:</b></span> {{ last_object.email}}</p>
+                    <p><span><b>Embedded Watermark:</b></span> {{ last_object.embedded_watermark}}</p>
+                    <p><span><b>Hash:</b></span> {{ last_object.hash}}</p>
+                    <p><span><b>Original Filename:</b></span> {{ last_object.filename}}</p>
+                    {% if last_object.receiver%}
+                    <p><span><b>Receiver:</b></span> {{ last_object.receiver}}</p>
+                    {% endif %}
+                                   
+            </tbody>
+        </table>
+        <br>
+        <button onclick="window.print()" style="height:40px;width:120px;border-radius: 5px;">Print Page <i class="fa fa-print"></i></button>
+       
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endif %}
+
+
+
 {% endblock %}
 
