@@ -12,6 +12,7 @@ urlpatterns = [
     path('about_us/',views.about_us, name = 'about_us'),
     path('services/',views.services, name = 'services'),
     path('menu_embed/',views.menu_embed, name='menu_embed'),
+    path('menu_extraction/',views.menu_extraction, name='menu_extraction'),
     path('embed_ownership/',views.embed_ownership, name='embed_ownership'),
     path('embed_enforcement/',views.embed_enforcement, name='embed_enforcement'),
     path('embed_ownership_text/',views.embed_ownership_text, name='embed_ownership_text'),
@@ -21,6 +22,11 @@ urlpatterns = [
     path('embed_enforcement_sound/',views.embed_enforcement_sound, name='embed_enforcement_sound'),
     path('embed_enforcement_image/',views.embed_enforcement_image, name='embed_enforcement_image'),
     path('embedded_files/',views.embedded_files, name='embedded_files'),
+    path('extract_text_info/',views.extract_text_info, name='extract_text_info'),
+    path('extract_sound_info/',views.extract_sound_info, name='extract_sound_info'),
+    path('extract_image_info/',views.extract_image_info, name='extract_image_info'),
+
+
     path('extract_embedded_info/',views.extract_embedded_info, name='extract_embedded_info'),
     path('delete_file/<str:hash_url>',views.delete_file,name='delete_file')
     
