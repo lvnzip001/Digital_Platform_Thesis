@@ -16,10 +16,10 @@ from my_platform.image_watermark_embed import watermark_embed
 from my_platform.image_watermark_extract import watermark_extract
 from my_platform.pdf_watermark_embed import pdf_embed_watermark
 from my_platform.pdf_watermark_extract import pdf_extract_watermark
-from .forms import Embed_Ownership_Image_Form, Embed_Enforcement_Sound_Form, Embed_Enforcement_Text_Form, Embed_Enforcement_Image_Form, Embed_Ownership_Sound_Form, Embed_Ownership_Text_Form, Extract_Embedded_Info_Form, CreateUserForm, UserForm
-from .models import Embed_Ownership_Text, Embed_Ownership_Image, Embed_Enforcement_Sound, Embed_Enforcement_Text, Embed_Enforcement_Image, Embed_Ownership_Sound, Extract_Embedded_Info, User_Info, Embedded_Files
-from itertools import chain
+from .forms import Embed_Ownership_Image_Form, Embed_Enforcement_Sound_Form, Embed_Enforcement_Text_Form, Embed_Enforcement_Image_Form, Embed_Ownership_Sound_Form, Embed_Ownership_Text_Form, CreateUserForm, UserForm,Extract_Embedded_Text_Form,Extract_Embedded_Sound_Form,Extract_Embedded_Image_Form
+from .models import Embed_Ownership_Text, Embed_Ownership_Image, Embed_Enforcement_Sound, Embed_Enforcement_Text, Embed_Enforcement_Image, Embed_Ownership_Sound, User_Info, Embedded_Files,Extract_Embedded_Text,Extract_Embedded_Sound,Extract_Embedded_Image
 from pathlib import Path
+from itertools import chain
 import hashlib
 from PIL import Image
 from my_platform.hash import get_hash
@@ -121,6 +121,14 @@ def menu_embed(request):
         messages.info(request, "Please login or create an account")
         return render(request, 'login.html')
 
+@login_required(login_url='login')
+def menu_extraction(request):
+    if request.user.is_authenticated:
+        return render(request, 'menu_extraction.html')
+    else:
+        messages.info(request, "Please login or create an account")
+        return render(request, 'login.html')
+
 
 @login_required(login_url='login')
 def embed_ownership(request):
@@ -144,8 +152,8 @@ def embed_ownership_text(request):
             last_object = Embed_Ownership_Text.objects.all().last()
             # last_object_location = Path.cwd()/"media"/f"{last_object.file}"
             last_object_location = MEDIA_ROOT + f"{last_object.file}"
-            embed_info_1 = f"{last_object.owner}"
-            embed_info_2 = str(datetime.datetime.now())
+            embed_info_1 ="Owner: " + f"{last_object.owner}"
+            embed_info_2 = "Timestamp: " + str(datetime.datetime.now())
             watermarkInfo = embed_info_1 + "_" + embed_info_2
 
             try:
@@ -190,7 +198,7 @@ def embed_ownership_text(request):
                 #mycursor.execute(sql, val)
                 # mydb.commit()
 
-                messages.error(request, 'File embedding failed. Hash of original file stored as record for ' +
+                messages.error(request, 'FileType Error: File embedding failed. Hash of original file stored as record for ' +
                                current_user_info.name + '. Go to Embedded Files to download document. ')
                 return render(request, 'embed_ownership_text.html', {'last_object': last_object, 'form': form, 'watermarkInfo': last_object.hash})
 
@@ -219,8 +227,8 @@ def embed_ownership_image(request):
             last_object = Embed_Ownership_Image.objects.all().last()
             # last_object_location = Path.cwd()/"media"/f"{last_object.file}"
             last_object_location = MEDIA_ROOT + f"{last_object.file}"
-            embed_info_1 = f"{last_object.owner}"
-            embed_info_2 = str(datetime.datetime.now())
+            embed_info_1 = "Owner: " + f"{last_object.owner}"
+            embed_info_2 = "Timestamp: " + str(datetime.datetime.now())
             watermarkInfo = embed_info_1 + "_" + embed_info_2
 
             try:
@@ -267,8 +275,8 @@ def embed_ownership_image(request):
 
                 close_db_conn(mydb, mycursor)
 
-                messages.success(request, 'File has been embedded  ' +
-                                 current_user_info.name + '. Go to Embedded Files to download document. ')
+                messages.success(request, 'FileType Error: File embedding failed. Hash of original file stored as record for ' +
+                               current_user_info.name + '. Go to Embedded Files to download document. ')
                 return render(request, 'embed_ownership_image.html', {'last_object': last_object, 'form': form, 'watermarkInfo': last_object.hash})
 
     else:
@@ -349,9 +357,9 @@ def embed_enforcement_text(request):
 
             last_object = Embed_Enforcement_Text.objects.all().last()
             last_object_location = MEDIA_ROOT + f"{last_object.file}"
-            embed_info_1 = f"{last_object.owner}"
-            embed_info_2 = str(datetime.datetime.now())
-            embed_info_3 = f"{last_object.receiver}"
+            embed_info_1 = "Owner: " + f"{last_object.owner}"
+            embed_info_2 = "Timestamp: " + str(datetime.datetime.now())
+            embed_info_3 = "Reciever: " + f"{last_object.receiver}"
             watermarkInfo = embed_info_1 + "-" + embed_info_3 + "_" + embed_info_2
 
             try:
@@ -367,7 +375,7 @@ def embed_enforcement_text(request):
 
                 """write information to myAdmin Sql"""
                 mydb, mycursor = open_db_conn()
-                sql = "INSERT INTO digitalenforcement_tbl (user_contact,file,embedded_watermark,hash,owner,receiver) VALUES(%s,%s,%s,%s,%s,%s)"
+                sql = "INSERT INTO digital_enforcement_tbl (user_contact,file,embedded_watermark,hash,owner,receiver) VALUES(%s,%s,%s,%s,%s,%s)"
     #
                 user_contact = str(current_user_email)
                 file = str(last_object.file)
@@ -430,17 +438,15 @@ def embed_enforcement_image(request):
     if request.method == 'POST':
         form = Embed_Enforcement_Image_Form(request.POST, request.FILES)
         if form.is_valid():
-            if str(Embed_Enforcement_Image.objects.all().last().file) == "":
-                return render(request, 'error.html')
-
             form.save()
             last_object = Embed_Enforcement_Image.objects.all().last()
             last_object_location = MEDIA_ROOT + f"{last_object.file}"
-            embed_info_1 = f"{last_object.owner}"
-            embed_info_2 = str(datetime.datetime.now())
-            embed_info_3 = f"{last_object.receiver}"
+            embed_info_1 = "Owner: " + f"{last_object.owner}"
+            embed_info_2 = "Timestamp: " + str(datetime.datetime.now())
+            embed_info_3 = "Receiver: " + f"{last_object.receiver}"
             watermarkInfo = embed_info_1 + "-" + embed_info_3 + "_" + embed_info_2
             print(last_object_location, f"{last_object.file}")
+            
 
             try:
                 watermark_embed(last_object_location,
@@ -450,7 +456,7 @@ def embed_enforcement_image(request):
                 """write information to myAdmin Sql"""
                 mydb, mycursor = open_db_conn()
                 sql = "INSERT INTO digital_enforcement_tbl (user_contact,file,embedded_watermark,hash,owner,receiver) VALUES(%s,%s,%s,%s,%s,%s)"
-    #
+            
                 user_contact = str(current_user_email)
                 file = str(last_object.file)
                 embedded_watermark = watermarkInfo
@@ -472,7 +478,7 @@ def embed_enforcement_image(request):
                 """write information to myAdmin Sql"""
                 mydb, mycursor = open_db_conn()
                 sql = "INSERT INTO digital_enforcement_tbl (user_contact,file,embedded_watermark,hash,owner,receiver) VALUES(%s,%s,%s,%s,%s,%s)"
-    #
+    
                 user_contact = str(current_user_email)
                 file = str(last_object.file)
                 embedded_watermark = 'no_watermark_info'
@@ -523,27 +529,27 @@ def embed_enforcement_sound(request):
                     MEDIA_ROOT + embedded_sound_location)
 
                 """write information to myAdmin Sql"""
-                mydb, mycursor = open_db_conn()
-                sql = "INSERT INTO digital_enforcement_tbl (user_contact,file,embedded_watermark,hash,owner,receiver) VALUES(%s,%s,%s,%s,%s,%s)"
+               # mydb, mycursor = open_db_conn()
+               # sql = "INSERT INTO digital_enforcement_tbl (user_contact,file,embedded_watermark,hash,owner,receiver) VALUES(%s,%s,%s,%s,%s,%s)"
     #
-                user_contact = str(current_user_email)
-                file = raw__file
-                embedded_watermark = last_object.owner
-                hash = last_object.hash
-                owner = last_object.owner
-                receiver = last_object.receiver
-
-                val = (user_contact, file, embedded_watermark,
-                       hash, owner, receiver)
-                mycursor.execute(sql, val)
-                mydb.commit()
+               # user_contact = str(current_user_email)
+               # file = raw__file
+               # embedded_watermark = last_object.owner
+               # hash = last_object.hash
+               # owner = last_object.owner
+               # receiver = last_object.receiver
+#
+               # val = (user_contact, file, embedded_watermark,
+               #        hash, owner, receiver)
+               # mycursor.execute(sql, val)
+               # mydb.commit()
 
                 messages.success(request, 'File has been embedded  ' +
                                  current_user_info.name + '. Go to Embedded Files to download document. ')
                 return render(request, 'embed_enforcement_sound.html', {'last_object': last_object, 'form': form})
 
             except:
-                return HttpResponse("File failure to upload")
+                return HttpResponse("File failure to upload, please check your internet connection")
 
     else:
         # return HttpResponse("Something up with the form")
@@ -616,7 +622,7 @@ def embedded_files(request):
 
             """Stored file for the sound is abit different so need to create the name"""
             uploaded_sounds = []
-            print(111111111111111111)
+
             for uploaded_file in uploaded_sounds_list:
                 if uploaded_file.user_info_id == current_user_id:
 
@@ -716,3 +722,147 @@ def delete_file(request, hash_url):
         return redirect('/embedded_files')
 
     return render(request, 'delete_file.html', {'file_to_delete': file_to_delete})
+
+def extract_text_info(request):
+
+    if request.method == 'POST':
+        form = Extract_Embedded_Text_Form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            last_object = Extract_Embedded_Text.objects.all().last()
+            # last_object_location = Path.cwd()/"media"/f"{last_object.file}"
+            last_object_location = MEDIA_ROOT + f"{last_object.file}"
+
+            try:
+                """if it passes it will be an embedded file, almost have a double security system"""
+               
+                watermarkInfo = pdf_extract_watermark(last_object_location)
+                last_object.info = watermarkInfo
+                last_object.hash = get_hash(last_object_location)
+                """write information to myAdmin Sql"""
+                #mydb, mycursor = open_db_conn()
+                #sql = "INSERT INTO digital_ownership_tbl (user_contact,file,embedded_watermark,hash,owner) VALUES(%s,%s,%s,%s,%s)"#
+    ##
+                #user_contact = str(current_user_email)
+                #file = str(last_object.file)
+                #embedded_watermark = 'no_watermark_info'
+                #hash = last_object.hash
+                #owner = last_object.owner
+    #
+                #val = (user_contact, file, embedded_watermark, hash, owner)
+                #mycursor.execute(sql, val)
+                # mydb.commit()
+
+                messages.success(request, 'File was embedded  ' +
+                                 last_object.info + '. Go to Embedded Files to download document. ')
+                return render(request, 'extract_text_info.html', {'last_object': last_object, 'form': form})
+
+
+            except:
+                """if it doesnt pass the hash of the file will be stored in the historic database and the person is the owner"""
+
+                last_object.hash = get_hash(last_object_location)
+
+
+                messages.error(request, 'File embedding was not found for ' +
+                               f"{last_object.file}" + '. Go to Embedded Files to download document. ')
+                return render(request, 'extract_text_info.html', {'last_object': last_object, 'form': form, 'watermarkInfo': last_object.hash})
+
+    else:
+        form = Extract_Embedded_Text_Form()
+
+    return render(request, 'extract_text_info.html', {'form': form})
+
+def extract_image_info(request):
+
+    if request.method == 'POST':
+        form = Extract_Embedded_Image_Form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            last_object = Extract_Embedded_Image.objects.all().last()
+            # last_object_location = Path.cwd()/"media"/f"{last_object.file}"
+            last_object_location = MEDIA_ROOT + f"{last_object.file}"
+            watermarkInfo = watermark_extract(last_object_location)
+            last_object.info = watermarkInfo
+            
+
+            try:
+                """if it passes it will be an embedded file, almost have a double security system"""
+                watermarkInfo = watermark_extract(last_object_location)
+                last_object.info = watermarkInfo
+                last_object.hash = get_hash(last_object_location)
+                """write information to myAdmin Sql"""
+                #mydb, mycursor = open_db_conn()
+                #sql = "INSERT INTO digital_ownership_tbl (user_contact,file,embedded_watermark,hash,owner) VALUES(%s,%s,%s,%s,%s)"#
+    ##
+                #user_contact = str(current_user_email)
+                #file = str(last_object.file)
+                #embedded_watermark = 'no_watermark_info'
+                #hash = last_object.hash
+                #owner = last_object.owner
+    #
+                #val = (user_contact, file, embedded_watermark, hash, owner)
+                #mycursor.execute(sql, val)
+                # mydb.commit()
+
+                messages.success(request, 'File was embedded  ' +
+                                 last_object.info + '. Go to Embedded Files to download document. ')
+                return render(request, 'extract_image_info.html', {'last_object': last_object, 'form': form})
+
+
+            except:
+                """if it doesnt pass the hash of the file will be stored in the historic database and the person is the owner"""
+                last_object.info = last_object.owner
+                last_object.hash = get_hash(last_object_location)
+
+
+                messages.error(request, 'File embedding was not found for ' +
+                               f"{last_object.file}" + '. Go to Embedded Files to download document. ')
+                return render(request, 'extract_image_info.html', {'last_object': last_object, 'form': form})
+
+    else:
+        #
+        form = Extract_Embedded_Image_Form()
+
+    return render(request, 'extract_image_info.html', {'form': form})
+
+def extract_sound_info(request):
+
+    if request.method == 'POST':
+        form = Extract_Embedded_Sound_Form(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            last_object = Extract_Embedded_Sound.objects.all().last()
+            # last_object_location = Path.cwd()/"media"/f"{last_object.file}"
+            last_object_location = MEDIA_ROOT + f"{last_object.file}"        
+            
+            """for sound what needs to happen is that I search the database for the owner, directly from the
+             the server one time in that way everything is kept sort"""
+            
+            """if it passes it will be an embedded file, almost have a double security system"""
+            last_object.hash = get_hash(last_object_location)
+                
+            """write information to myAdmin Sql"""
+            #mydb, mycursor = open_db_conn()
+            #sql = "INSERT INTO digital_ownership_tbl (user_contact,file,embedded_watermark,hash,owner) VALUES(%s,%s,%s,%s,%s)"#
+    ##
+                #user_contact = str(current_user_email)
+                #file = str(last_object.file)
+            #embedded_watermark = 'no_watermark_info'
+            #hash = last_object.hash
+            #owner = last_object.owner
+    #
+            #val = (user_contact, file, embedded_watermark, hash, owner)
+            #mycursor.execute(sql, val)
+            # mydb.commit()
+            
+            messages.success(request, 'File hash  ' +
+                             last_object.hash + '. Verify owner below. ')
+            """ need to get feature to verify the original version of this file, by querying the"""
+            return render(request, 'extract_sound_info.html', {'last_object': last_object, 'form': form})
+
+    else:
+        #
+        form = Extract_Embedded_Sound_Form()
+
+    return render(request, 'extract_sound_info.html', {'form': form})
