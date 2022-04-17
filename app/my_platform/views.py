@@ -732,6 +732,7 @@ def extract_text_info(request):
                     queryresult = mycursor.fetchall()
                 print(1111111111111111111111111)
                 close_db_conn(mydb, mycursor)
+                last_object.occurence_number = len(queryresult)
                 last_object.id = queryresult[0][0]
                 last_object.Timestamp = str(queryresult[0][1])
                 last_object.email = queryresult[0][2]
@@ -795,6 +796,7 @@ def extract_image_info(request):
                     queryresult = mycursor.fetchall()
 
                 close_db_conn(mydb, mycursor)
+                last_object.occurence_number = len(queryresult)
                 last_object.id = queryresult[0][0]
                 last_object.Timestamp = str(queryresult[0][1])
                 last_object.email = queryresult[0][2]
@@ -859,6 +861,7 @@ def extract_sound_info(request):
                     queryresult = mycursor.fetchall()
 
                 close_db_conn(mydb, mycursor)
+                last_object.occurence_number = len(queryresult)
                 last_object.id = queryresult[0][0]
                 last_object.Timestamp = str(queryresult[0][1])
                 last_object.email = queryresult[0][2]
