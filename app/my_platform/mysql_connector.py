@@ -1,5 +1,6 @@
 import mysql.connector
 
+#TODO encypt db password and name
 def open_db_conn():
     mydb = mysql.connector.connect(
         host='bx4awsynv0pkp8jdrbat-mysql.services.clever-cloud.com',
@@ -13,7 +14,9 @@ def open_db_conn():
     return(mydb,mycursor)
 
 
-
+def close_db_conn(mydb, mycursor):
+    mycursor.close()
+    mydb.close()
 
 ##mycursor.execute("DROP TABLE IF EXISTS digital_resources")
 ##mycursor.execute("CREATE TABLE digital (name VARCHAR(255),product VARCHAR(255),love VARCHAR(255))")
@@ -39,6 +42,3 @@ def open_db_conn():
 #
 #mycursor.execute(sql3)
 #mydb.commit()
-def close_db_conn(mydb, mycursor):
-    mycursor.close()
-    mydb.close()

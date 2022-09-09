@@ -1,0 +1,136 @@
+
+@inproceedings{whyIPFS,
+  title={Why The Internet Needs IPFS Before It’s Too Late},
+  author={Amber,Case},
+  URL = {https://techcrunch.com/2015/10/04/why-the-internet-needs-ipfs-before-its-too-late/}
+  year={2015}
+   
+}
+
+@inproceedings{whyIPFS2,
+  title={What are Decentralized storage systems?: 3 Benefits of Filecoin to IPFS},
+  author={Ogueji, Caleb},
+  URL = {https://medium.com/coinmonks/what-are-decentralized-storage-systems-3-benefits-of-filecoin-to-ipfs-45aaf7905ac3}
+  year={2022}
+   
+}
+
+@inproceedings{DigitalProperty,
+  title={What is Digital Property?},
+  author={Jim, Lamm},
+  URL = {http://www.digitalpassing.com/2010/06/21/what-is-digital-property/#:~:text=Digital%20property%20includes%20data%2C%20Internet,rights%20and%20intellectual%20property%20rights.&text=Intellectual%20property%20rights%20also%20can,code%2C%20and%20other%20creative%20works.}
+  year={2010}
+   
+}
+
+@article{van1995not,
+  title={Why not one big database? Principles for data ownership},
+  author={Van Alstyne, Marshall and Brynjolfsson, Erik and Madnick, Stuart},
+  journal={Decision Support Systems},
+  volume={15},
+  number={4},
+  pages={267--284},
+  year={1995},
+  publisher={Elsevier}
+}
+
+@book{scassa2018data,
+  title={Data ownership},
+  author={Scassa, Teresa},
+  year={2018},
+  publisher={Centre for International Governance Innovation}
+}
+
+@article{privacybydesign,
+  title={Regulating privacy by design},
+  author={Rubinstein, Ira S},
+  journal={Berkeley Tech. LJ},
+  volume={26},
+  pages={1409},
+  year={2011},
+  publisher={HeinOnline}
+}
+
+@inproceedings{sencar2005watermarking,
+  title={Watermarking and ownership problem: a revisit},
+  author={Sencar, Husrev T and Memon, Nasir},
+  booktitle={Proceedings of the 5th ACM workshop on Digital rights management},
+  pages={93--101},
+  year={2005}
+}
+
+@inproceedings{wong1998watermark,
+  title={A watermark for image integrity and ownership verification},
+  author={Wong, Ping Wah},
+  booktitle={PICS},
+  pages={374--379},
+  year={1998}
+}
+
+@article{rizzo2019fine,
+  title={Fine-grain watermarking for intellectual property protection},
+  author={Rizzo, Stefano Giovanni and Bertini, Flavio and Montesi, Danilo},
+  journal={EURASIP Journal on Information Security},
+  volume={2019},
+  number={1},
+  pages={1--20},
+  year={2019},
+  publisher={Springer}
+}
+
+@article{contreras2017protection,
+  title={Protection of relational databases by means of watermarking: recent advances and challenges},
+  author={Contreras, Javier Franco and Coatrieux, Gouenou},
+  journal={Advances in Security in Computing and Communications},
+  pages={101--123},
+  year={2017},
+  publisher={IntechOpen}
+}
+
+@article{kamran2018comprehensive,
+  title={A comprehensive survey of watermarking relational databases research},
+  author={Kamran, Muhammad and Farooq, Muddassar},
+  journal={arXiv preprint arXiv:1801.08271},
+  year={2018}
+}
+
+@article{rao2007multimedia,
+  title={Multimedia digital rights protection using watermarking techniques},
+  author={Rao, N Vyaghreswara and Pandit, SN Narahari},
+  journal={Information Systems Security},
+  volume={16},
+  number={2},
+  pages={93--99},
+  year={2007},
+  publisher={Taylor \& Francis}
+}
+
+@article{tao2014robust,
+  title={Robust image watermarking theories and techniques: A review},
+  author={Tao, Hai and Chongmin, Li and Zain, Jasni Mohamad and Abdalla, Ahmed N},
+  journal={Journal of applied research and technology},
+  volume={12},
+  number={1},
+  pages={122--138},
+  year={2014},
+  publisher={Universidad Nacional Aut{\'o}noma de M{\'e}xico, Instituto de Ciencias Aplicadas y~…}
+}
+
+@article{li2015robust,
+  title={A robust watermarking scheme based on maximum wavelet coefficient modification and optimal threshold technique},
+  author={Li, Chunlei and Song, Xiaowei and Liu, Zhoufeng and Zhang, Aihua and Yang, Ruimin},
+  journal={Journal of Electrical and Computer Engineering},
+  volume={2015},
+  year={2015},
+  publisher={Hindawi}
+}
+
+article{asmara2017comparison,
+  title={Comparison of Discrete Cosine Transforms (DCT), Discrete Fourier Transforms (DFT), and Discrete Wavelet Transforms (DWT) in Digital Image Watermarking},
+  author={Asmara, Rosa A and Agustina, Reza and others},
+  journal={International Journal of Advanced Computer Science and Applications},
+  volume={8},
+  number={2},
+  year={2017},
+  publisher={Science and Information (SAI) Organization Limited}
+}
