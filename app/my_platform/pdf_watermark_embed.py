@@ -1,9 +1,17 @@
+"""A python script to perform PDF watermark embedding/detection"""
+
+# Method based of PyPDF2 package
+# Modified 2021 by Ziphozihle Luvuno
+
 import sys
 import PyPDF2
 from reportlab.lib.units import cm
 from reportlab.pdfgen import canvas
 import sys
 sys.path.insert(0, 'c:/Django_3/Django_3.3/mysite')
+
+
+
 
 def create_watermark(file_name, content):
     c = canvas.Canvas(file_name, pagesize=(30 * cm, 30 * cm))

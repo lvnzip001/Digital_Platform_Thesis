@@ -2,19 +2,7 @@
    on the basis of direct-sequence spread spectrum method."""
 
 # Copyright (C) 2020 by Akira TAMAMORI
-
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# Modified 2021 by Ziphozihle Luvuno
 
 import  numpy  as  np
 from scipy.io import wavfile
@@ -152,7 +140,7 @@ def embed_sound(raw__file:str, preprocessed_file:str="host1.wav"):
 
 def move_sound_dep(raw__file,embedded_file):
     
-    #first delete the file in
+    
     """Function to move the sound files to the correct folder"""    
     original_file_location = "sound/" + raw__file
     shutil.move(os.path.join(BASE_DIR, 'pseudo_rand.dat'), AUDIO_ROOT+'/pseudo_rand.dat')

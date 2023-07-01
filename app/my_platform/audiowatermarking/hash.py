@@ -16,19 +16,32 @@ import hashlib
 
 #filename = "input.png"
 #filename1 = "output.png"
-filename2 = 'wmed_signal.wav'
-filename3='wmed_signal2.wav'
-
-with open(filename2, "rb") as f:
-    bytes = f.read()
-    hash = hashlib.sha256(bytes).hexdigest()
-    print(hash)
-
-with open(filename3, "rb") as f:
-    bytes1 = f.read()
-    hash1 = hashlib.sha256(bytes1).hexdigest()
-    print(hash1)
+original_file = 'wmed_signal.wav'
+watermarked_file ='wmed_signal2.wav'
 
 
+"""A python script to perform audio watermark extraction"""
 
-print(hash == hash1)
+# Copyright (C) 2020 by Akira TAMAMORI
+# Modified 2021 by Ziphozihle Luvuno
+
+
+def extract_audio(original_file,watermarked_file):
+    with open(original_file, "rb") as f:
+        bytes = f.read()
+        hash_orignal = hashlib.sha256(bytes).hexdigest()
+        
+
+    with open(watermarked_file, "rb") as f:
+        bytes1 = f.read()
+        hash_watermarked = hashlib.sha256(bytes1).hexdigest()
+
+    if hash_orignal == hash_watermarked:
+        return "File Encoding Verified"
+    
+    return "File Encoding Unverified"
+        
+
+
+
+

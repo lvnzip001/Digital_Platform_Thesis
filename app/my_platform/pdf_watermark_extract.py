@@ -1,3 +1,8 @@
+"""A python script to perform PDF watermark extraction"""
+
+# Method based of PyPDF2 package
+# Modified 2021 by Ziphozihle Luvuno
+
 import PyPDF2
 import sys
 

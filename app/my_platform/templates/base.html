@@ -1,111 +1,114 @@
-{% load static %}<!doctype html>
+{% load static %}
+
+<!doctype html>
 <html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Lock File</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <!-- Favicons -->
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+  <!-- Vendor CSS Files -->
 
-	<style>
-		
-		#logo{
-		}
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
-		body{
-			background-color: #ebeff5;
-		}
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}" type="text/css">
 
+  
 
-		#total-orders{
-			background-color: #4cb4c7;
-		}
-
-
-		#orders-delivered{
-			background-color: #7abecc;
-		}
-
-		#orders-pending{
-			background-color: #7CD1C0;
-		}
-    #hello-msg{
-      font-size: 18px;
-      color: #fff;
-      margin-right: 20px;
-
-    }
-
-	</style>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="icon" href="{% static 'site_images/site_logo.png' %}" type="image/png">
+  <link rel="icon" href="{% static 'site_images/logo1.png' %}" type="image/png">
   <title>{% block title %}Digital Ownership Platform{% endblock %}</title>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <img src="{% static 'site_images/site_logo.png' %}" alt="Site Logo" style="width: 35px;" text-align="center">
-      &nbsp;
-      <a class="navbar-brand" href="{% url 'register' %}">OwnIT</a>
-      &nbsp;&nbsp;&nbsp;&nbsp&nbsp;&nbsp&nbsp;
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav">
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="{% static 'site_images/logo1.png' %}" alt="">
+        <span>OwnIT</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
           {% if request.user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'menu_embed' %}">Embed</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'menu_extraction' %}">Extract</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'embedded_files' %}">Embedded Files</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'services' %}">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'account_profile' %}">Profile</a>
-          </li>
+          <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'menu_embed' %}">Embed</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'menu_extraction' %}">Extract</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'embedded_files' %}">Embedded Files</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'about_us' %}">About Us</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'services' %}">Services</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'account_profile' %}">Profile</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'logout' %}">Logout</a></li>
+
           {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'index' %}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'menu_extraction' %}">Extract</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'about_us' %}">About Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'services' %}">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}">Login</a>
-          </li>
+          <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'menu_extraction' %}">Extract</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'embedded_files' %}">Embedded Files</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'about_us' %}">About Us</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'services' %}">Services</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'login' %}">Login</a></li>
           {% endif %}
+
+          <!-- <li class="nav-item">
+            <span id="hello-msg">Hello, {{request.user}}</span>
+            <span><a  id="hello-msg" href="{% url 'logout' %}">LogOut</a></span>
+            </li> -->
+
+
+              
+
         </ul>
-      </div>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
     </div>
-      <li class="nav-item">
-      <span id="hello-msg">Hello, {{request.user}}</span>
-      <span><a  id="hello-msg" href="{% url 'logout' %}">LogOut</a></span>
-      </li>
-  </nav>
-  <br>
-            {% block content %}
-            {% endblock %}
+   
+  </header><!-- End Header -->
+
+
      
+  <br>
+  <br>  
+  <br>
+  <br>   
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/purecounter/purecounter_vanilla.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
 </html>
+
+{% block content %}
+{% endblock %}

@@ -19,7 +19,7 @@ def UploadToPathAndRename(instance, filename):
     upload_to = 'photos'
     name = filename.split('.')[0]
     ext = "png"
-    # get filename
+    # get filename-
     if instance.pk:
         filename = '{}.{}'.format(instance.pk, ext)
     else:

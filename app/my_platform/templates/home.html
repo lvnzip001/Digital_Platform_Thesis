@@ -1,40 +1,439 @@
+
 {% extends 'base.html' %}
-
-{% block content %}
 {% load static %}
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-10 col-md-12">
-      <div class="card mb-4">
-        <div class="card-body">
+{% block content %}
 
-  <h2 class="card-title">A Platform to Manage Digital Property Rights</h2>
-  <hr>
-  <p class="card-text">Built on Python and Django Framework</p>
-  <p class="card-text">
-    Read Weekly Reports <a href="https://docs.google.com/document/d/1lYPGJRohpiooDSPPFESAk6XxvrisocHhGvNFLeGQpT0/edit?userstoinvite=cogeorg%40gmail.com"> Weekly Reports</span></a> or
-    Access to Thesis <a href="https://www.overleaf.com/7959138165pxxqgzvqwsvd " target="_blank">Thesis Document</a>.
   <br>
-  </p>
-  <p class="card-text">
-    <br>
-    {% if request.user.is_authenticated %}
-    Welcome to the digital ownership platform. Get started and claim ownership.
-    {%else%}
-    Login to account to use services:
-    <a href="{% url 'login' %}" class = "btn btn-outline-info  btn-sm btn-block" style="height:30px;width:115px;" text-align="center">Login</a>
-    {% endif %}
-  </p>
+  
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center hero" style="background: url('{% static "assets/img/hero-bg.png" %}')">
     
+
+    <div class="container" >
+    <div class="container" >
+      <div class="row">
+        <div class="col-lg-6 d-flex flex-column justify-content-center">
+          <h1 data-aos="fade-up">A Platform to Manage Digital Provanence</h1>
+          <h3 data-aos="fade-up" data-aos-delay="400">Built on Python and Django Framework</h3>
+          <div data-aos="fade-up" data-aos-delay="600">
+            <div class="text-center text-lg-start">
+              <a href="{% url 'login' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                <span>Get Started </span>
+                <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
+          <img src="{% static 'assets/img/hero-img.png' %}" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+    
+    <br>
+    <div >
+      <center><img src="{% static 'site_images/uct_logo.png' %}" alt="Text File/Audio File" style="width: 75px;"></center>
+      
+      <center><span style="font-size: 12px; font-style: italic; color: rgb(238, 26, 61);">School Of Economics : Fintech Project</span></center>
+    </div>
+    
+  </div>
+
+    
+   
+
+    
+
+
+  </section><!-- End Hero -->
+
+         <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+
+      <div class="container" data-aos="fade-up">
+        <div class="row gx-0">
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="content">
+              <h3>Origin Of OwnIt</h3>
+              <p style="text-align: justify;">
+                OwnIT originates from a FinTech Masters thesis, with the aim of revolutionizing digital provenance management. 
+                This solution establishes ownership rights, deters unauthorized copying, and protects intellectual property 
+                through advanced watermarking and cryptographic hash functions. With transparency at its core, users confidently claim ownership and trace asset provenance securely. 
+                This platform fosters collaboration among creators and rights holders, safeguarding the integrity of the digital ecosystem.
+              </p>
+              <div class="text-center text-lg-start">
+                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                  <span>Read More</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <img src="{% static 'assets/img/about.jpg' %}" class="img-fluid" alt="">
+          </div>
+
+        </div>
+      </div>
+
+    </section><!-- End About Section -->
+  
+      <!-- ======= Features Section ======= -->
+      <section id="features" class="features">
+  
+        <div class="container" data-aos="fade-up">
+  
+          <header class="section-header">
+            <h2>Features</h2>
+          </header>
+  
+          <div class="row">
+  
+            <div class="col-lg-6">
+              <img src="{% static 'assets/img/features.png' %}" class="img-fluid" alt="features-img">
+            </div>
+  
+            <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
+              <div class="row align-self-center gy-4">
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="200">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <h3>Warkmark Embedding</h3>
+                  </div>
+                </div>
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="300">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <h3>Warkmark Extraction</h3>
+                  </div>
+                </div>
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="400">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <h3>Copy Control</h3>
+                  </div>
+                </div>
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="500">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <h3>Ownership Transfer Capability</h3>
+                  </div>
+                </div>
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="600">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <h3>Digital Property Wallet</h3>
+                  </div>
+                </div>
+  
+                <div class="col-md-6" data-aos="zoom-out" data-aos-delay="700">
+                  <div class="feature-box d-flex align-items-center">
+                    <i class="bi bi-check"></i>
+                    <h3>Images, PDF, Audio functionality</h3>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+  
+          </div> <!-- / row -->
+          
+
+          <!-- Feature Tabs -->
+          <div class="row feture-tabs" data-aos="fade-up">
+            <div class="col-lg-6">  
+              <!-- Tabs -->
+              <ul class="nav nav-pills mb-3">
+                <li>
+                  <a class="nav-link active" data-bs-toggle="pill" href="#tab1">About Us</a>
+                </li>
+                <li>
+                  <a class="nav-link" data-bs-toggle="pill" href="#tab2">Why this</a>
+                </li>
+                <li>
+                  <a class="nav-link" data-bs-toggle="pill" href="#tab3">About</a>
+                </li>
+              </ul><!-- End Tabs -->
+  
+              <!-- Tab Content -->
+              <div class="tab-content">
+  
+                <div class="tab-pane fade show active" id="tab1">
+                  <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                  </div>
+                  <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Incidunt non veritatis illum ea ut nisi</h4>
+                  </div>
+                  <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
+                </div><!-- End Tab 1 Content -->
+  
+                <div class="tab-pane fade show" id="tab2">
+                  <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                  </div>
+                  <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Incidunt non veritatis illum ea ut nisi</h4>
+                  </div>
+                  <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
+                </div><!-- End Tab 2 Content -->
+  
+                <div class="tab-pane fade show" id="tab3">
+                  <p>Consequuntur inventore voluptates consequatur aut vel et. Eos doloribus expedita. Sapiente atque consequatur minima nihil quae aspernatur quo suscipit voluptatem.</p>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Repudiandae rerum velit modi et officia quasi facilis</h4>
+                  </div>
+                  <p>Laborum omnis voluptates voluptas qui sit aliquam blanditiis. Sapiente minima commodi dolorum non eveniet magni quaerat nemo et.</p>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Incidunt non veritatis illum ea ut nisi</h4>
+                  </div>
+                  <p>Non quod totam minus repellendus autem sint velit. Rerum debitis facere soluta tenetur. Iure molestiae assumenda sunt qui inventore eligendi voluptates nisi at. Dolorem quo tempora. Quia et perferendis.</p>
+                </div><!-- End Tab 3 Content -->
+  
+              </div>
+  
+            </div>
+  
+            <div class="col-lg-6">
+              <img src="{% static 'assets/img/features-2.png' %}" class="img-fluid" alt="">
+            </div>
+  
+          </div><!-- End Feature Tabs -->
+          
+  
+         
+  
+        </div>
+  
+      </section><!-- End Features Section -->
+
+       <!-- ======= Values Section ======= -->
+       <section id="values" class="values">
+
+        <div class="container" data-aos="fade-up">
+  
+          <header class="section-header">
+            <h2>Our Values</h2>
+            <p>We Believe In: </p>
+          </header>
+  
+          <div class="row">
+  
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="box">
+                <img src="{% static 'assets/img/values-2.png' %}" class="img-fluid" alt="">
+                <h3>Integrity</h3>
+                <p>By implementing robust watermarking algorithms and cryptographic hash functions, we ensure that digital provenance is maintained and protected.</p>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+              <div class="box">
+                <img src="{% static 'assets/img/values-1.png' %}" class="img-fluid" alt="">
+                <h3>Ownership Rights</h3>
+                <p>Our platform enables users to establish a clear chain of ownership, discouraging illegal copying or unauthorized usage of copyrighted materials.</p>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="600">
+              <div class="box">
+                <img src="{% static 'assets/img/values-3.png' %}" class="img-fluid" alt="">
+                <h3>Collaboration</h3>
+                <p> We value collaboration and recognize the importance of working together to combat digital piracy and protect intellectual property rights.</p>
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+  
+      </section><!-- End Values Section -->
+  
+      <!-- ======= Services Section ======= -->
+      <section id="services" class="services">
+  
+        <div class="container" data-aos="fade-up">
+  
+          <header class="section-header">
+            <h2>Services</h2>
+            <p>Provided Services</p>
+          </header>
+  
+          <div class="row gy-4">
+  
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+              <div class="service-box blue">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Watermark Embedding </h3>
+                <p>Provident nihil minus qui consequatur non omnis maiores. Eos accusantium minus dolores iure perferendis tempore et consequatur.</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+              <div class="service-box orange">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Watermark Extraction</h3>
+                <p>Ut autem aut autem non a. Sint sint sit facilis nam iusto sint. Libero corrupti neque eum hic non ut nesciunt dolorem.</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+              <div class="service-box green">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Digital Ownership Market </h3>
+                <p>Ut excepturi voluptatem nisi sed. Quidem fuga consequatur. Minus ea aut. Vel qui id voluptas adipisci eos earum corrupti.</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+              <div class="service-box red">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Digital Wallet</h3>
+                <p>Non et temporibus minus omnis sed dolor esse consequatur. Cupiditate sed error ea fuga sit provident adipisci neque.</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+              <div class="service-box purple">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Digital Provenance </h3>
+                <p>Ownership History</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+              <div class="service-box pink">
+                <i class="ri-discuss-line icon"></i>
+                <h3>Digital Provenance</h3>
+                <p>Hic molestias ea quibusdam eos. Fugiat enim doloremque aut neque non et debitis iure. Corrupti recusandae ducimus enim.</p>
+                <a href="#" class="read-more"><span>Read More</span> <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+  
+          </div>
+  
+        </div>
+  
+      </section><!-- End Services Section -->
+
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-12 text-center">
+            <h4>White Paper Access</h4>
+            <p>For inquiries or requests pertaining to the platform's white paper, enter your email address below. </p>
+          </div>
+          <div class="col-lg-6">
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Submit">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-5 col-md-12 footer-info">
+            <a href="index.html" class="logo d-flex align-items-center">
+              <img src="assets/img/logo.png" alt="">
+              <span>FlexStart</span>
+            </a>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
+            <h4>Contact Us</h4>
+            <p>
+              70 Rivonia Rd Sandhurst<br>
+              Sandton, 2196<br>
+              South Africa <br><br>
+              <strong>Email:</strong> zluvuno@gmail.com<br>
+            </p>
+
+          </div>
 
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<br>
-<br>
-<center><img src="{% static 'site_images/uct_logo.png' %}" alt="Text File/Audio File" style="width: 350px;"></center>
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>OwnIT</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">Zipho Luvuno</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+
+      
+  
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
+
+
+</body>
+
 
 {% endblock %}

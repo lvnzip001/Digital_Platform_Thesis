@@ -134,3 +134,14 @@ article{asmara2017comparison,
   year={2017},
   publisher={Science and Information (SAI) Organization Limited}
 }
+
+
+
+@article{NFTMarketCap,
+  title={Market cap of Art Blocks NFT projects worldwide},
+  author={Statista},
+  year={2022},
+  publisher={Statista Research Department}
+}
+
+Market capitalization of Art Blocks non-fungible token
