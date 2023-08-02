@@ -64,10 +64,9 @@
 
           {% else %}
           <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'how_it_works' %}">How It Works</a></li>
           <li><a class="nav-link scrollto" href="{% url 'menu_extraction' %}">Extract</a></li>
           <li><a class="nav-link scrollto" href="{% url 'embedded_files' %}">Embedded Files</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'about_us' %}">About Us</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'services' %}">Services</a></li>
           <li><a class="getstarted scrollto" href="{% url 'login' %}">Login</a></li>
           {% endif %}
 
