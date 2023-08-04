@@ -3,6 +3,8 @@
 {% load static %}
 {% block content %}
 
+  <br>
+  
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center hero" style="background: url('{% static "assets/img/hero-bg.png" %}')">
     
@@ -16,7 +18,7 @@
           <h4 data-aos="fade-up" data-aos-delay="400">Enforcing Ownership Claims and Safeguarding Intellectual Property</h4>
           <div data-aos="fade-up" data-aos-delay="600">
             <div class="text-center text-lg-start">
-              <a href="{% url 'menu_embed' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+              <a href="{% url 'login' %}" class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                 <span>Get Started </span>
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -56,18 +58,15 @@
             <div class="content">
               <h3>Origin Of OwnIt</h3>
               <p style="text-align: justify;">
-                <b>OwnIT</b> originates from a FinTech Masters thesis by <b style="color: rgb(0, 77, 105);"><a href="https://www.linkedin.com/in/zipho-luvuno-127898100/">Zipho Luvuno</a></b>, with the aim of enhancing/automating digital provenance management. 
+                OwnIT originates from a FinTech Masters thesis, with the aim of revolutionizing digital provenance management. 
                 This solution establishes ownership rights, deters unauthorized copying, and protects intellectual property 
-                through advanced watermarking and cryptographic hash functions.
-              </p>
-              <p style="text-align: justify;">
-               With transparency at its core, users confidently claim ownership and trace asset provenance securely. 
+                through advanced watermarking and cryptographic hash functions. With transparency at its core, users confidently claim ownership and trace asset provenance securely. 
                 This platform fosters collaboration among creators and rights holders, safeguarding the integrity of the digital ecosystem.
               </p>
               <div class="text-center text-lg-start">
-                <a href="#services" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
-                  <span>See More</span>
-                  <i class="bi bi-arrow-down"></i>
+                <a href="#" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                  <span>Read More</span>
+                  <i class="bi bi-arrow-right"></i>
                 </a>
               </div>
             </div>
@@ -295,11 +294,12 @@
         <div class="row gy-4">
           <div class="col-lg-5 col-md-12 footer-info">
             <a href="index.html" class="logo d-flex align-items-center">
-              <img src="{% static 'site_images/logo1.png' %} alt="">
+              <img src="assets/img/logo.png" alt="">
+              <span>OwnIT</span>
             </a>
             <p>OwnIT: A platform for secure digital provenance management, enabling confident ownership claims and safeguarding intellectual property.</p>
             <div class="social-links mt-3">
-              <a href="https://www.linkedin.com/in/zipho-luvuno-127898100/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
           </div>
 
@@ -346,7 +346,7 @@
         &copy; Copyright <strong><span>OwnIT</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        Designed by <a href="https://www.linkedin.com/in/zipho-luvuno-127898100/">Zipho Luvuno</a>
+        Designed by <a href="https://bootstrapmade.com/">Zipho Luvuno</a>
       </div>
     </div>
   </footer><!-- End Footer -->
