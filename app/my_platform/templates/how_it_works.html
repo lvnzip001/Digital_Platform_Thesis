@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+
+    <!-- ======= Features Section ======= -->
+    <section id="how_it_works_feature" class="features">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>How It Works</h2>
+        </header>
+
+
+        <!-- Feature Tabs -->
+        <div class="row feture-tabs" data-aos="fade-up">
+          <div class="col-lg-12">
+            <h3>This section will explain how it works</h3>
+            <br>
+            <!-- Tabs -->
+            <ul class="nav nav-pills mb-3">
+              <li>
+                <a class="nav-link active" data-bs-toggle="pill" href="#tab0">Account Registration</a>
+              </li>
+              <li>
+                <a class="nav-link" data-bs-toggle="pill" href="#tab1">Watermarking</a>
+              </li>
+              <li>
+                <a class="nav-link" data-bs-toggle="pill" href="#tab2">Extraction</a>
+              </li>
+              <li>
+                <a class="nav-link" data-bs-toggle="pill" href="#tab3">Digital Wallet</a>
+              </li>
+              <li>
+                <a class="nav-link" data-bs-toggle="pill" href="#tab4">MarketPlace</a>
+              </li>
+              <li>
+                <a class="nav-link" data-bs-toggle="pill" href="#tab5">Digital Provenance</a>
+              </li>
+            </ul><!-- End Tabs -->
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+              <div class="tab-pane fade show active row" id="tab0">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <p>Individually tailored workspaces offer secure access. Users register for dedicated accounts, ensuring privacy and exclusivity.
+                       This approach offers distinct data separation, enabling isolated storage of encrypted assets. </p>
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="bi bi-check2"></i>
+                      <h4>Protects assets in separated workspaces. Controlled and secure sharing.</h4>
+                    </div>
+                    <p>Compliance with privacy regulations is assured through isolated data management. This robust strategy enhances user confidence, 
+                      supports efficient resource allocation, and safeguards the overall platform integrity.</p>
+                  </div>
+                  <div class="col-lg-4">
+                    <img src="{% static 'assets/img/features-2.png' %}" class="img-fluid" alt="">
+                  </div>
+               
+              </div>
+              
+            </div><!-- End Tab 1 Content -->
+
+              <div class="tab-pane fade show row" id="tab1">
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <p>Users initiate the watermarking process by uploading various media formats, such as images, PDFs, and audio files. </p>
+                      <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-check2"></i>
+                        <h4>Establish ownership rights. Deter unauthorized copying.</h4>
+                      </div>
+                      <p>Subsequently, hidden messages are seamlessly integrated into these media items, facilitating robust ownership verification.</p>
+                   
+                      <p>This process enhances intellectual property protection and solidifies unequivocal ownership rights.</p>
+                    </div>
+                    <div class="col-lg-4">
+                      <img src="{% static 'assets/img/features-2.png' %}" class="img-fluid" alt="">
+                    </div>
+                 
+                </div>
+                
+              </div><!-- End Tab 1 Content -->
+
+              <div class="tab-pane fade show row" id="tab2">
+                  <div class="row">
+                    <div class="col-lg-8">
+                      <p>Through the act of file uploads, users access an extraction mechanism, allowing the retrieval 
+                        of concealed data for the purpose of confirming ownership or identifying potential breaches. </p>
+                      <div class="d-flex align-items-center mb-2">
+                        <i class="bi bi-check2"></i>
+                        <h4>Validate ownership. Detect potential leaks.</h4>
+                      </div>
+                      <p>This process involves comparing the extracted data with recipient information, validating the origin and ownership. 
+                        This capability empowers proactive security measures, thereby reinforcing the overall integrity of the digital ecosystem.</p>
+                           
+                    </div>
+                    <div class="col-lg-4">
+                      <img src="{% static 'assets/img/features-2.png' %}" class="img-fluid" alt="">
+                    </div>
+                 
+                </div>
+                
+              </div><!-- End Tab 2 Content -->
+
+              <div class="tab-pane fade show row" id="tab3">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <p>All accumulated digital assets are securely stored within an individualized digital wallet, accessible exclusively by the rightful owner. 
+                      This repository ensures exclusive access to embedded files, facilitating downloads and controlled dissemination. </p>
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="bi bi-check2"></i>
+                      <h4>Secure asset storage. Controlled file distribution.</h4>
+                    </div>
+                    <p>Users possess the ability to prudently circulate their intellectual assets, 
+                      thereby maintaining ownership control.Users possess the ability to prudently circulate their intellectual assets, thereby maintaining ownership control.</p>
+                         
+                  </div>
+                  <div class="col-lg-4">
+                    <img src="{% static 'assets/img/features-2.png' %}" class="img-fluid" alt="">
+                  </div>
+               
+              </div>
+              
+            </div><!-- End Tab 3 Content -->
+
+            <div class="tab-pane fade show row" id="tab4">
+              <div class="row">
+                <div class="col-lg-8">
+                  <p>An inclusive dynamic marketplace, users explore a variety of files contributed by fellow users. Particularly noteworthy is the 
+                    bid-based ownership acquisition feature, which underpins the platform's collaborative ethos.  </p>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-check2"></i>
+                    <h4>Collaborative exploration. Bid-based ownership acquisition.</h4>
+                  </div>
+                  <p>Bidders submit credit-based bids, representing a fungible form of value. 
+                    Successful bids facilitate the seamless transition of ownership while also compensating the original content owner.</p>
+                       
+                </div>
+                <div class="col-lg-4">
+                  <img src="{% static 'assets/img/features-2.png' %}" class="img-fluid" alt="">
+                </div>
+             
+            </div>
+            
+          </div><!-- End Tab 4 Content -->
+
+          <div class="tab-pane fade show row" id="tab5">
+            <div class="row">
+              <div class="col-lg-8">
+                <p>Nested within the marketplace, the Digital Provenance feature equips users with the 
+                  valuable capability to examine and authenticate a digital object's historical lineage. </p>
+                <div class="d-flex align-items-center mb-2">
+                  <i class="bi bi-check2"></i>
+                  <h4>Ownership history verification. Enhanced transparency.</h4>
+                </div>
+                <p>This comprehensive insight into an item's ownership history ensures transparency, 
+                  empowering stakeholders with a sense of trust and confidence in the integrity of the digital ecosystem.</p>
+                     
+              </div>
+              <div class="col-lg-4">
+                <img src="{% static 'assets/img/features-2.png' %}" class="img-fluid" alt="">
+              </div>
+           
+          </div>
+          
+        </div><!-- End Tab 5 Content -->
+
+
+           
+
+            </div>
+
+          </div>
+
+          
+        </div><!-- End Feature Tabs -->
+
+
+      </div>
+
+    </section><!-- End Features Section -->
+
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="center">
+  <div class="row justify-content-center">
+   <div class="col-md-1 col-centered">
+    <img src="{% static 'site_images/site_logo.png' %}" alt="Site Logo" style="width: 60px;">
+    </div>
+    <div class="col-md-1 col-centered">
+     <img src="{% static 'site_images/uct_logo_1.png' %}" alt="Site Logo" style="width: 64px;">
+    </div>
+  </div>
+  <center><p><i>--  A Digital Ownership Platform  --&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i></p></center>
+  </div>
+</div>
+
+{% endblock %}

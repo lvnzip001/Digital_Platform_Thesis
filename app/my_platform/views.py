@@ -27,7 +27,23 @@ import datetime
 import io
 import sys
 from app.settings import MEDIA_ROOT, AUDIO_ROOT
+from django.urls import reverse
 
+def my_view(request):
+    reversed_urls = {
+        'index': reverse(''),
+        'menu_embed': reverse('menu_embed'),
+        'menu_extraction': reverse('menu_extraction'),
+        'embedded_files': reverse('embedded_files'),
+        'about_us': reverse('about_us'),
+        'services': reverse('services'),
+        'account_profile': reverse('account_profile'),
+        'logout': reverse('logout/'),
+        '/how_it_works/': reverse('how_it_works'),
+        'login': reverse('login/'),
+    }
+    
+    return render(request, 'base.html', {'reversed_urls': reversed_urls})
 
 def index(request):
     return render(request, 'home.html')
@@ -37,10 +53,12 @@ def registerPage(request):
     if request.user.is_authenticated:
         return redirect('index')
     else:
+        
         form = CreateUserForm()
 
         if request.method == 'POST':
             form = CreateUserForm(request.POST)
+            #breakpoint()
             if form.is_valid():
                 user = form.save()
                 username = form.cleaned_data.get('username')
@@ -59,6 +77,7 @@ def logoutUser(request):
 
 
 def loginPage(request):
+    
     if request.user.is_authenticated:
         return redirect('index')
     else:
@@ -66,6 +85,7 @@ def loginPage(request):
         if request.method == 'POST':
             username = request.POST.get('username')
             password = request.POST.get('password')
+            
 
             user = authenticate(request, username=username, password=password)
 
@@ -104,6 +124,8 @@ def account_profile(request):
 def about_us(request):
     return render(request, 'about_us.html')
 
+def how_it_works(request):
+    return render(request, 'how_it_works.html')
 
 def services(request):
     return render(request, 'services.html')

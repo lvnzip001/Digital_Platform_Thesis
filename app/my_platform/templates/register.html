@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-
-{% block content %}
 {% load static %}
+{% block content %}
+
 
 <!DOCTYPE html>
 <html>
@@ -20,143 +20,376 @@
       height: 100%;
       background: #ebeff5 !important;
     }
-    .user_card {
-      width: 350px;
-      margin-top: auto;
-      margin-bottom: auto;
-      background: #9ebab3;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      padding: 10px;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      border-radius: 5px;
-
+    .form-check {
+      display: block;
+      min-height: 1.5rem;
+      padding-left: 1.5em;
+      margin-bottom: .125rem;
     }
-
-    .form_container {
-      margin-top: 20px;
+    
+    .form-check-input:checked[type=checkbox] {
+      --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
     }
-
-    #form-title{
-      color: #fff;
-    }
-    .login_btn {
+    
+    .invalid-feedback {
+      display: none;
       width: 100%;
-      background: #4a585c !important;
-      color: white !important;
+      margin-top: .25rem;
+      font-size: .875em;
+      color: var(--bs-form-invalid-color);
     }
-    .login_btn:focus {
-      box-shadow: none !important;
-      outline: 0px !important;
+    
+    .form-check-input:checked {
+      background-color: #354adc;
+      border-color: #0d6efd;
     }
-    .login_container {
-      padding: 0 2rem;
+    c
+    form-check-input:checked {
+      background-color: #354adc;
+      border-color: #0d6efd;
     }
-    #messages{
-			background-color: #7bc2b0;
-			color: rgb(245, 0, 0);
-			padding: 10px;
-			margin-top: 10px;
-		}
-    .input-group-text {
-      background: #f7ba5b !important;
-      color: white !important;
-      border: 0 !important;
-      border-radius: 0.25rem 0 0 0.25rem !important;
+    .form-check-input[type=checkbox] {
+      border-radius: 0.25em;
     }
-    .input_user,
-    .input_pass:focus {
-      box-shadow: none !important;
-      outline: 0px !important;
+    .form-check .form-check-input {
+      float: left;
+      margin-left: -1.5em;
     }
+    .form-check-input {
+      --bs-form-check-bg: var(--bs-body-bg);
+      width: 1em;
+      height: 1em;
+      margin-top: 0.25em;
+      vertical-align: top;
+      background-color: var(--bs-form-check-bg);
+      background-image: var(--bs-form-check-bg-image);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      border: var(--bs-border-width) solid var(--bs-border-color);
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .invalid-feedback {
+      display: none;
+      width: 100%;
+      margin-top: 0.25rem;
+      font-size: .875em;
+      color: var(--bs-form-invalid-color);}
 
   </style>
 
 </head>
+
 <body>
-  <div class="container h-75">
-    <div class="d-flex justify-content-center h-75">
+  <main>
+    <div class="container">
+      <section class="section register min-vh-90 d-flex flex-column align-items-center justify-content-center py-4">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 col-md-6 d-flex flex-column align-items-center justify-content-center">
+              <div class="d-flex justify-content-center py-4">
+              
+              </div>
+
+               <!-- Default Card -->
+          {% if form.errors %}
+          <div class="card d-flex justify-content-center py-2" style="background-color: #e7938794;">
+            <div class="card-body">
+              <center><h5 class="card-title">Form Input Error <i class="bi bi-emoji-frown"></i>
+              </h5></center>
+              {{form.errors}}
+            </div>
+          </div><!-- End Default Card -->
+          {% endif %}
+
+              <!-- End Logo -->
+
+              <div class="card mb-3">
+                <div class="card-body">
+                  <div class="pt-0 pb-2">
+                    <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+
+                    <p class="text-center small">
+                      Enter your personal details to create account
+                    </p>
+                  </div>
+
+                  <form
+                    method="POST"
+                    action=""
+                    class="row g-3 needs-validation"
+                    novalidate="novalidate"
+                  >
+                    {% csrf_token %}
+
+                    <div class="col-12">
+                      <label
+                        for="yourUsername"
+                        class="form-label"
+                      >Username</label>
+
+                      <div class="input-group has-validation">
+                        <span
+                          class="input-group-text"
+                          id="inputGroupPrepend"
+                        >@</span>
+
+                        {{ form.username }}
+
+                        <div class="invalid-feedback">Please choose a username.</div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <label
+                        for="yourEmail"
+                        class="form-label"
+                      >Your Email</label>
+
+                      {{ form.email }}
+
+                      <div class="invalid-feedback">
+                        Please enter a valid Email address!
+                      </div>
+                    </div>
+
+                   
+
+                    <div class="col-12">
+                      <label
+                        for="yourPassword"
+                        class="form-label"
+                      >Password</label>
+
+                      {{ form.password1 }}
+
+                      <div class="invalid-feedback">Please enter your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label
+                        for="yourPassword"
+                        class="form-label"
+                      >Confirm Password</label>
+
+                      {{ form.password2 }}
+
+                      <div class="invalid-feedback">Please confirm your password!</div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          name="acceptTerms"
+                          value="true"
+                          required="true"
+                          id="acceptTerms"
+                        ></input>
+
+                        <label
+                          class="form-check-label"
+                          for="acceptTerms"
+                        >
+                          &nbsp; I agree and accept the
+                        </label>
+                          <a
+                            href="terms_of_use"
+                            data-bs-toggle="modal"
+                            data-bs-target="#ExtralargeModal"
+                          >terms and conditions</a>
+                        
+
+                        <div
+                          class="modal fade"
+                          id="ExtralargeModal"
+                          tabindex="-1"
+                        >
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Terms and Conditions</h5>
+
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"
+                                ></button>
+                              </div>
+                              
+                              <div class="modal-body">
+                                <p>
+                                  <b style="font-size: medium;">
+                                    Welcome to our <span style="color: #0735ff;">e-Funda</span>! By using our platform, you agree to the following terms:
+                                  </b>
+                                 
+                                </p>
+
+                                <h5>Account Usage</h5>
+                                <ol>
+                                  <li style="font-size: small;">
+                                    Keep your account credentials confidential.
+                                  </li>
+
+                                  <li style="font-size: small;">
+                                    Provide accurate information during registration.
+                                  </li>
+
+                                  <li style="font-size: small;">
+                                    Respect the platform's guidelines for content sharing.
+                                  </li>
+                                </ol>
+
+                                <h5>Intellectual Property</h5>
+
+                                <ol>
+                                  <li style="font-size: small;">
+                                    Respect our copyrights and trademarks.
+                                  </li>
+
+                                  <li style="font-size: small;">
+                                    Obtain written consent before modifying or distributing platform material.
+                                  </li>
+                                </ol>
+
+                                <h5>User Content</h5>
+
+                                <ol>
+                                  <li style="font-size: small;">
+                                    Grant us permission to use shared content for platform improvement.
+                                  </li>
+
+                                  <li style="font-size: small;">
+                                    Take responsibility for the legality and appropriateness of your content.
+                                  </li>
+                                </ol>
+
+                                <h5>Privacy</h5>
+
+                                <p style="font-size: small;">
+                                  Your personal information is handled according to our Privacy Policy.
+                                </p>
+
+                                <h5>Limitation of Liability</h5>
+
+                                <p style="font-size: small;">
+                                  We strive for accuracy but cannot guarantee it. We are not liable for direct or indirect damages from platform use.
+                                </p>
+
+                                <h5>
+                                  Modifications and Termination
+                                </h5>
+
+                                <p style="font-size: small;">
+                                  We may modify or terminate the platform at any time. These terms may be updated, and continued use implies acceptance.
+                                </p>
+
+                                <h5>Governing Law</h5>
+
+                                <p style="font-size: small;">
+                                  These terms are governed by Protection of Personal Information (<b>POPI</b>) Act of South Africa.
+                                </p>
+
+                                <p style="font-size: small;">
+                                  By using our <b style="color: #0735ff;">e-learning platform</b>, you <b style="color: #0735ff;">acknowledge and accept these terms</b>. For any questions, please contact us.
+                                </p>
+                              </div>
+
+                              <div class="modal-footer">
+                                <button
+                                  type="button"
+                                  class="btn btn-secondary"
+                                  data-bs-dismiss="modal"
+                                >Close</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- End Basic Modal -->
+
+                        <div class="invalid-feedback">
+                          You must agree before submitting.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-12">
+                      <button
+                        class="btn btn-primary w-100"
+                        data-bs-toggle="modal"
+                        data-bs-target="#disablebackdrop"
+                        type="submit"
+                      >Create Account</button>
+                    </div>
+
+                    <div class="col-12">
+                      <p class="small mb-0">
+                        Already have an account?
+
+                        <a href="{% url 'login' %}">Log in</a>
+                      </p>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <a
+              href="{% url 'index' %}"
+              class="logo d-flex align-items-center w-auto"
+              >
+              <img
+                src="{% static 'site_images/logo1.png' %}"
+                style="width: 60px;"
+                alt=""
+              >
       
-      <div class="user_card">
-        <div class="d-flex justify-content-center">
-          <h3 id="form-title">CREATE NEW ACCOUNT</h3>
-        </div>
-        <div class="d-flex justify-content-center form_container">
-
-          <form method="POST" action="">
-            {% csrf_token %}
-            <div class="input-group mb-3">
-              <div class="input-group-append">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              
+              </a>
+              <br>
+      
+            <div class="credits">
+              Created by
+      
+              <a href="https://www.linkedin.com/in/zipho-luvuno-127898100/">Zipho Luvuno</a>
               </div>
-              {{form.username}}
             </div>
-            <div class="input-group mb-2">
-              <div class="input-group-append">
-                <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
-              </div>
-              {{form.email}}
-            </div>
-            <div class="input-group mb-2">
-              <div class="input-group-append">
-                <span class="input-group-text"><i class="fas fa-key"></i></span>
-              </div>
-              {{form.password1}}
-            </div>
-            <div class="input-group mb-2">
-              <div class="input-group-append">
-                <span class="input-group-text"><i class="fas fa-key"></i></span>
-              </div>
-              {{form.password2}}
-            </div>
-
-               <div class="d-flex justify-content-center mt-3 login_container">
-               <input class="btn login_btn" type="submit" value="Register Account">
-               </div>
-          </form>
-        </div>
-          {{form.errors}}
-        <div class="mt-4">
-          <div class="d-flex justify-content-center links">
-            Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
           </div>
         </div>
-        
-      </div>
+      </section>
     </div>
-    <div class="center">
-      <div class="row justify-content-center">
-       <div class="col-md-1 col-centered">
-          <img src="{% static 'site_images/site_logo.png' %}" alt="Site Logo" style="width: 60px;">
-        </div>
-        <div class="col-md-1 col-centered">
-         <img src="{% static 'site_images/uct_logo_1.png' %}" alt="Site Logo" style="width: 64px;">
-        </div>
-      </div>
-      <center><p><i>--  A Digital Ownership Platform  --</i></p></center>
-    </div>
-  </div>
-  
+  </main>
+
+  <!-- End #main -->
+
+  <a
+    href="#"
+    class="back-to-top d-flex align-items-center justify-content-center"
+  >
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+
   <script>
-            /* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
-    //We start indexing at one because CSRF_token is considered and input field 
-     */
-
     //Query All input fields
-    var form_fields = document.getElementsByTagName('input')
-    form_fields[1].placeholder='Username';
-    form_fields[2].placeholder='Email';
-    form_fields[3].placeholder='Enter password';
-    form_fields[4].placeholder='Re-enter Password';
+var form_fields = document.getElementsByTagName('input')
+form_fields[1].placeholder='';
+form_fields[2].placeholder='';
+form_fields[3].placeholder='';
+form_fields[4].placeholder='';
+form_fields[5].placeholder='';
 
 
-    for (var field in form_fields){	
-      form_fields[field].className += ' form-control'
-    }
+for (var field in form_fields){	
+form_fields[field].className += ' form-control'
+}
   </script>
 </body>
 </html>

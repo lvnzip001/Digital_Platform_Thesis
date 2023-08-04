@@ -1,19 +1,18 @@
 {% load static %}
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Lock File</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <title>OwnIT</title>
+  <meta content="Digital Provenance Management" name="description">
+  <meta content="Zipho Luvuno" name="keywords">
   <!-- Favicons -->
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -45,7 +44,7 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{% url 'index' %}" class="logo d-flex align-items-center">
         <img src="{% static 'site_images/logo1.png' %}" alt="">
         <span>OwnIT</span>
       </a>
@@ -53,24 +52,26 @@
       <nav id="navbar" class="navbar">
         <ul>
           {% if request.user.is_authenticated %}
-          <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'menu_embed' %}">Embed</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'menu_extraction' %}">Extract</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'embedded_files' %}">Embedded Files</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'about_us' %}">About Us</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'services' %}">Services</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'account_profile' %}">Profile</a></li>
-          <li><a class="getstarted scrollto" href="{% url 'logout' %}">Logout</a></li>
-
-          {% else %}
-          <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'menu_extraction' %}">Extract</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'embedded_files' %}">Embedded Files</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'about_us' %}">About Us</a></li>
-          <li><a class="nav-link scrollto" href="{% url 'services' %}">Services</a></li>
-          <li><a class="getstarted scrollto" href="{% url 'login' %}">Login</a></li>
-          {% endif %}
-
+          <li><a class="nav-link scrollto {% if request.path == reversed_urls.index %}active{% endif %}" href="{% url 'index' %}">Home</a></li>
+          <li><a class="nav-link scrollto {% if request.path == reversed_urls.menu_embed %}active{% endif %}" href="{% url 'menu_embed' %}">Embed</a></li>
+          <li><a class="nav-link scrollto {% if request.path == reversed_urls.menu_extraction %}active{% endif %}" href="{% url 'menu_extraction' %}">Extract</a></li>
+          <li><a class="nav-link scrollto {% if request.path == reversed_urls.embedded_files %}active{% endif %}" href="{% url 'embedded_files' %}">Embedded Files</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'about_us' %}#Motivation">Motivation</a></li>
+          <li><a class="nav-link scrollto {% if request.path == reversed_urls.account_profile %}active{% endif %}" href="{% url 'account_profile' %}">Profile</a></li>
+          <li><a class="getstarted scrollto {% if request.path == reversed_urls.logout %}active{% endif %}" href="{% url 'logout' %}">Logout</a></li>
+        {% elif request.path == '/login/' %}
+        <li><a class="nav-link scrollto" href="{% url 'index' %}#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'index' %}#about">About Us</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'how_it_works' %}#how_it_works_feature">How It Works</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'about_us' %}#Motivation">Motivation</a></li>
+        <li><a class="getstarted scrollto {% if request.path == reversed_urls.login %}active{% endif %}" href="{% url 'login' %}">Register</a></li>
+        {% else %}
+        <li><a class="nav-link scrollto" href="{% url 'index' %}#hero">Home</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'index' %}#about">About Us</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'how_it_works' %}#how_it_works_feature">How It Works</a></li>
+        <li><a class="nav-link scrollto" href="{% url 'about_us' %}#Motivation">Motivation</a></li>
+        <li><a class="getstarted scrollto {% if request.path == reversed_urls.login %}active{% endif %}" href="{% url 'login' %}">Login</a></li>
+        {% endif %}
           <!-- <li class="nav-item">
             <span id="hello-msg">Hello, {{request.user}}</span>
             <span><a  id="hello-msg" href="{% url 'logout' %}">LogOut</a></span>
